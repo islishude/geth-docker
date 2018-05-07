@@ -7,6 +7,7 @@ services:
     ports:
       - 8545:8545
       - 30303:30303
+      - 30303/udp:30303/udp
     volumes:
       - $PWD:/root
     command:
