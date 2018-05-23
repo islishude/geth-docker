@@ -8,7 +8,7 @@ services:
     ports:
       - "30303:30303"
     volumes:
-      - ${HOME}:/root
+      - ${HOME}/.ethereum:/root/.ethereum
     expose:
       - "8545"
     networks: 
