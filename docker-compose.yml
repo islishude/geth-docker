@@ -24,6 +24,8 @@ services:
       - --txpool.globalslots=20000 
       - --txpool.accountqueue=256
       - --txpool.globalqueue=20000
+      - --syncmode
+      - full
   
   nginx:
     image: "nginx:alpine"
