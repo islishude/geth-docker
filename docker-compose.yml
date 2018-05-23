@@ -7,6 +7,7 @@ services:
     restart: unless-stopped
     ports:
       - "30303:30303"
+      - "30303:30303/udp"
     volumes:
       - ${HOME}/.ethereum:/root/.ethereum
     expose:
