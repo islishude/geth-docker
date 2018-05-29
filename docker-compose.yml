@@ -19,15 +19,11 @@ services:
       - --rpcaddr
       - geth
       - --ipcdisable
-      # fix nginx proxy error
-      # see https://github.com/ethereum/wiki/issues/576
       - --rpcvhosts=*
       - --txpool.globalslots=20000 
       - --txpool.accountqueue=256
       - --txpool.globalqueue=20000
-      - --syncmode
-      - full
-  
+
   nginx:
     image: "nginx:alpine"
     restart: unless-stopped
