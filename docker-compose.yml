@@ -9,7 +9,7 @@ services:
       - "30303:30303"
       - "30303:30303/udp"
     volumes:
-      - ${HOME}/.ethereum:/root/.ethereum
+      - ${PWD}/.ethereum:/root/.ethereum
     expose:
       - "8545"
     networks: 
@@ -27,6 +27,7 @@ services:
       - --txpool.globalqueue=20000
       - --syncmode
       - full
+      - --cache=1024
 
   nginx:
     image: "nginx:alpine"
