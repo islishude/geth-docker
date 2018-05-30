@@ -20,7 +20,6 @@ services:
       - "debug,eth,net,shh,txpool,web3"
       - --rpcaddr
       - geth
-      - --ipcdisable
       - --rpcvhosts=*
       - --txpool.globalslots=20000 
       - --txpool.accountqueue=256
