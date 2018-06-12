@@ -6,8 +6,8 @@ start it by `docker-compose up -d`.
 ## Set Auth
 ```
 # ubuntu
-# install htpasswd
+# Install htpasswd
 apt install apache2-util -y
-#  auth to auth.txt
+# Add to auth.txt
 htpasswd -b auth.txt YOUR-USERNAME YOUR-PASSWORD
 ```
