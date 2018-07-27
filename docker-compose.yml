@@ -27,6 +27,8 @@ services:
       - --syncmode
       - full
       - --cache=1024
+      - --maxpeers
+      - 100
 
   nginx:
     image: "nginx:alpine"
