@@ -3,7 +3,7 @@ version: "3"
 services:
 
   geth:
-    image: ethereum/client-go
+    image: "ethereum/client-go:v1.8.12"
     restart: unless-stopped
     ports:
       - "30303:30303"
@@ -31,7 +31,7 @@ services:
       - 100
 
   nginx:
-    image: "nginx:alpine"
+    image: "nginx:1.14.0"
     restart: unless-stopped
     ports:
       - "8080:8080"
