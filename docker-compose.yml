@@ -16,19 +16,15 @@ services:
       - eth
     command:
       - --rpc
-      - --rpcapi
-      - "debug,eth,net,shh,txpool,web3"
-      - --rpcaddr
-      - geth
+      - --rpcapi="debug,eth,net,shh,txpool,web3"
+      - --rpcaddr=geth
       - --rpcvhosts=*
       - --txpool.globalslots=20000 
       - --txpool.accountqueue=256
       - --txpool.globalqueue=20000
-      - --syncmode
-      - full
+      - --syncmode=full
       - --cache=1024
-      - --maxpeers
-      - 100
+      - --maxpeers=100
 
   nginx:
     image: "nginx:1.14.0"
