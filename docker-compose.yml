@@ -14,6 +14,8 @@ services:
       - "8545"
     networks: 
       - eth
+    stop_signal: SIGINT
+    stop_grace_period: 1m30s
     command:
       - --rpc
       - --rpcapi="debug,eth,net,shh,txpool,web3"
