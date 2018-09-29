@@ -1,11 +1,11 @@
 ## Geth Full Mode
+
 Add nginx proxy to protect Ethereum JSON-RPC API with password.
 
 start it by `docker-compose up -d`.
 
-use geth fast Node Mode by `git checkout fastnode`.
-
 ## Set Auth
+
 ```
 # ubuntu
 # Install htpasswd

@@ -32,7 +32,12 @@ services:
       # Maximum number of network peers (network disabled if set to 0) (default: 25)
       - --maxpeers=100
       # Blockchain sync mode ("fast", "full", or "light")
-      # - --syncmode=full
+      - --syncmode=full
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
 
   nginx:
     image: "nginx:1.14.0"
