@@ -1,9 +1,8 @@
 version: "3"
 
 services:
-
   geth:
-    image: "ethereum/client-go:v1.8.15"
+    image: "ethereum/client-go:v1.8.16"
     restart: unless-stopped
     ports:
       - "30303:30303"
@@ -22,12 +21,18 @@ services:
       - "debug,eth,net,shh,txpool,web3"
       - --rpcaddr=geth
       - --rpcvhosts=*
-      - --txpool.globalslots=20000 
+      # Maximum number of non-executable transaction slots permitted per account (default: 64)
       - --txpool.accountqueue=256
+      # Maximum number of non-executable transaction slots for all accounts (default: 1024)
       - --txpool.globalqueue=20000
-      - --syncmode=full
-      - --cache=1024
+      # Maximum amount of time non-executable transaction are queued (default: 3h0m0s)
+      - --txpool.lifetime=72h0m0s
+      # Megabytes of memory allocated to internal caching (default: 1024)
+      - --cache=2048
+      # Maximum number of network peers (network disabled if set to 0) (default: 25)
       - --maxpeers=100
+      # Blockchain sync mode ("fast", "full", or "light")
+      # - --syncmode=full
 
   nginx:
     image: "nginx:1.14.0"
