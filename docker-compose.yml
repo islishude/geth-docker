@@ -16,7 +16,7 @@ services:
     command:
       - --rpc
       - --rpcapi
-      - "eth,txpool,web3"
+      - "eth,txpool,net,web3"
       - --rpcaddr=0.0.0.0
       - --rpcvhosts=*
       # Maximum number of non-executable transaction slots permitted per account (default: 64)
