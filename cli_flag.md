@@ -1,4 +1,4 @@
-```
+<!-- spell-checker: disable -->
 NAME:
    geth - the go-ethereum command line interface
 
@@ -6,10 +6,10 @@ NAME:
 
 USAGE:
    geth [options] command [command options] [arguments...]
-   
+
 VERSION:
-   1.8.14-stable
-   
+   1.8.16-stable-477eb093
+
 COMMANDS:
    account           Manage accounts
    attach            Start an interactive JavaScript environment (connect to node)
@@ -32,7 +32,7 @@ COMMANDS:
    version           Print version numbers
    wallet            Manage Ethereum presale wallets
    help, h           Shows a list of commands or help for one command
-   
+
 ETHEREUM OPTIONS:
   --config value                               TOML configuration file
   --datadir "/Users/lishude/Library/Ethereum"  Data directory for the databases and keystore
@@ -48,11 +48,11 @@ ETHEREUM OPTIONS:
   --lightserv value                            Maximum percentage of time allowed for serving LES requests (0-90) (default: 0)
   --lightpeers value                           Maximum number of LES client peers (default: 100)
   --lightkdf                                   Reduce key-derivation RAM & CPU usage at some expense of KDF strength
-  
+
 DEVELOPER CHAIN OPTIONS:
   --dev               Ephemeral proof-of-authority network with a pre-funded developer account, mining enabled
   --dev.period value  Block period to use in developer mode (0 = mine only if transaction pending) (default: 0)
-  
+
 ETHASH OPTIONS:
   --ethash.cachedir                         Directory to store the ethash verification caches (default = inside the datadir)
   --ethash.cachesinmem value                Number of recent ethash caches to keep in memory (16MB each) (default: 2)
@@ -60,7 +60,7 @@ ETHASH OPTIONS:
   --ethash.dagdir "/Users/lishude/.ethash"  Directory to store the ethash mining DAGs (default = inside home folder)
   --ethash.dagsinmem value                  Number of recent ethash mining DAGs to keep in memory (1+GB each) (default: 1)
   --ethash.dagsondisk value                 Number of recent ethash mining DAGs to keep on disk (1+GB each) (default: 2)
-  
+
 TRANSACTION POOL OPTIONS:
   --txpool.locals value        Comma separated accounts to treat as locals (no flush, priority inclusion)
   --txpool.nolocals            Disables price exemptions for locally submitted transactions
@@ -73,17 +73,17 @@ TRANSACTION POOL OPTIONS:
   --txpool.accountqueue value  Maximum number of non-executable transaction slots permitted per account (default: 64)
   --txpool.globalqueue value   Maximum number of non-executable transaction slots for all accounts (default: 1024)
   --txpool.lifetime value      Maximum amount of time non-executable transaction are queued (default: 3h0m0s)
-  
+
 PERFORMANCE TUNING OPTIONS:
   --cache value            Megabytes of memory allocated to internal caching (default: 1024)
   --cache.database value   Percentage of cache memory allowance to use for database io (default: 75)
   --cache.gc value         Percentage of cache memory allowance to use for trie pruning (default: 25)
   --trie-cache-gens value  Number of trie node generations to keep in memory (default: 120)
-  
+
 ACCOUNT OPTIONS:
   --unlock value    Comma separated list of accounts to unlock
   --password value  Password file to use for non-interactive password input
-  
+
 API AND CONSOLE OPTIONS:
   --rpc                  Enable the HTTP-RPC server
   --rpcaddr value        HTTP-RPC server listening interface (default: "localhost")
@@ -101,7 +101,7 @@ API AND CONSOLE OPTIONS:
   --jspath loadScript    JavaScript root path for loadScript (default: ".")
   --exec value           Execute JavaScript statement
   --preload value        Comma separated list of JavaScript files to preload into the console
-  
+
 NETWORKING OPTIONS:
   --bootnodes value     Comma separated enode URLs for P2P discovery bootstrap (set v4+v5 instead for light servers)
   --bootnodesv4 value   Comma separated enode URLs for P2P v4 discovery bootstrap (light server, full nodes)
@@ -115,24 +115,28 @@ NETWORKING OPTIONS:
   --netrestrict value   Restricts network communication to the given IP networks (CIDR masks)
   --nodekey value       P2P node key file
   --nodekeyhex value    P2P node key as hex (for testing)
-  
+
 MINER OPTIONS:
-  --mine                          Enable mining
-  --miner.threads value           Number of CPU threads to use for mining (default: 0)
-  --miner.notify value            Comma separated HTTP URL list to notify of new work packages
-  --miner.gasprice "18000000000"  Minimal gas price for mining a transactions
-  --miner.gastarget value         Target gas floor for mined blocks (default: 4712388)
-  --miner.etherbase value         Public address for block mining rewards (default = first account) (default: "0")
-  --miner.extradata value         Block extra data set by the miner (default = client version)
-  --miner.recommit value          Time interval to recreate the block being mined. (default: 3s)
-  
+  --mine                         Enable mining
+  --miner.threads value          Number of CPU threads to use for mining (default: 0)
+  --miner.notify value           Comma separated HTTP URL list to notify of new work packages
+  --miner.gasprice "1000000000"  Minimum gas price for mining a transaction
+  --miner.gastarget value        Target gas floor for mined blocks (default: 8000000)
+  --miner.gaslimit value         Target gas ceiling for mined blocks (default: 8000000)
+  --miner.etherbase value        Public address for block mining rewards (default = first account) (default: "0")
+  --miner.extradata value        Block extra data set by the miner (default = client version)
+  --miner.recommit value         Time interval to recreate the block being mined (default: 3s)
+  --miner.noverify               Disable remote sealing verification
+
 GAS PRICE ORACLE OPTIONS:
   --gpoblocks value      Number of recent blocks to check for gas prices (default: 20)
   --gpopercentile value  Suggested gas price is the given percentile of a set of recent transaction gas prices (default: 60)
-  
+
 VIRTUAL MACHINE OPTIONS:
-  --vmdebug  Record information useful for VM and contract debugging
-  
+  --vmdebug         Record information useful for VM and contract debugging
+  --vm.evm value    External EVM configuration (default = built-in interpreter)
+  --vm.ewasm value  External ewasm configuration (default = built-in interpreter)
+
 LOGGING AND DEBUGGING OPTIONS:
   --fakepow                 Disables proof-of-work verification
   --nocompaction            Disables db compaction after import
@@ -147,7 +151,7 @@ LOGGING AND DEBUGGING OPTIONS:
   --blockprofilerate value  Turn on block profiling with the given rate (default: 0)
   --cpuprofile value        Write CPU profile to the given file
   --trace value             Write execution trace to the given file
-  
+
 METRICS AND STATS OPTIONS:
   --metrics                          Enable metrics collection and reporting
   --metrics.influxdb                 Enable metrics export/push to an external InfluxDB database
@@ -156,23 +160,23 @@ METRICS AND STATS OPTIONS:
   --metrics.influxdb.username value  Username to authorize access to the database (default: "test")
   --metrics.influxdb.password value  Password to authorize access to the database (default: "test")
   --metrics.influxdb.host.tag host   InfluxDB host tag attached to all measurements (default: "localhost")
-  
+
 WHISPER (EXPERIMENTAL) OPTIONS:
   --shh                       Enable Whisper
   --shh.maxmessagesize value  Max message size accepted (default: 1048576)
   --shh.pow value             Minimum POW accepted (default: 0.2)
-  
+  --shh.restrict-light        Restrict connection between two whisper light clients
+
 DEPRECATED OPTIONS:
-  --minerthreads value      Number of CPU threads to use for mining (deprecated, use --miner.threads) (default: 0)
-  --targetgaslimit value    Target gas floor for mined blocks (deprecated, use --miner.gastarget) (default: 4712388)
-  --gasprice "18000000000"  Minimal gas price for mining a transactions (deprecated, use --miner.gasprice)
-  --etherbase value         Public address for block mining rewards (default = first account, deprecated, use --miner.etherbase) (default: "0")
-  --extradata value         Block extra data set by the miner (default = client version, deprecated, use --miner.extradata)
-  
+  --minerthreads value     Number of CPU threads to use for mining (deprecated, use --miner.threads) (default: 0)
+  --targetgaslimit value   Target gas floor for mined blocks (deprecated, use --miner.gastarget) (default: 8000000)
+  --gasprice "1000000000"  Minimum gas price for mining a transaction (deprecated, use --miner.gasprice)
+  --etherbase value        Public address for block mining rewards (default = first account, deprecated, use --miner.etherbase) (default: "0")
+  --extradata value        Block extra data set by the miner (default = client version, deprecated, use --miner.extradata)
+
 MISC OPTIONS:
   --help, -h  show help
-  
+
 
 COPYRIGHT:
    Copyright 2013-2018 The go-ethereum Authors
-```

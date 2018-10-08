@@ -1,10 +1,16 @@
-## Geth Full Mode
+# Geth Docker
 
+## High-Performance Node
+Run with `docker-compose up -d` to start high performance ethereum service.
+
+Recommend 500G SSD and 32G RAM
+
+## Geth Proxy
 Add nginx proxy to protect Ethereum JSON-RPC API with password.
 
-start it by `docker-compose up -d`.
+start it by `cd proxy/full && docker-compose up -d`.
 
-## Set Auth
+**Set Auth Helper**
 
 ```
 # ubuntu
