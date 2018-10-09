@@ -12,7 +12,7 @@ services:
     volumes:
       - ${PWD}/.ethereum:/root/.ethereum
     stop_signal: SIGINT
-    stop_grace_period: 1m30s
+    stop_grace_period: 2m
     command:
       - --rpc
       - --rpcapi
@@ -24,7 +24,7 @@ services:
       # Maximum number of non-executable transaction slots for all accounts (default: 1024)
       - --txpool.globalqueue=20000
       # Maximum amount of time non-executable transaction are queued (default: 3h0m0s)
-      - --txpool.lifetime=12h0m0s
+      # - --txpool.lifetime=12h0m0s
       # Megabytes of memory allocated to internal caching (default: 1024)
       - --cache=4096
       # Maximum number of network peers (network disabled if set to 0) (default: 25)
