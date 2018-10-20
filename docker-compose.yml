@@ -3,7 +3,7 @@ version: "3"
 services:
 
   geth:
-    image: "ethereum/client-go:v1.8.16"
+    image: "ethereum/client-go:v1.8.17"
     restart: unless-stopped
     ports:
       - "30303:30303"
@@ -19,12 +19,12 @@ services:
       - "eth,txpool,net,web3"
       - --rpcaddr=0.0.0.0
       - --rpcvhosts=*
-      # Maximum number of non-executable transaction slots permitted per account (default: 64)
-      - --txpool.accountqueue=128
-      # Maximum number of non-executable transaction slots for all accounts (default: 1024)
-      - --txpool.globalqueue=20000
+      # Minimum number of executable transaction slots guaranteed per account (default: 16)
+      # - --txpool.accountslots=16
+      # Maximum number of executable transaction slots for all accounts (default: 4096)
+      - --txpool.globalslots=10000
       # Maximum amount of time non-executable transaction are queued (default: 3h0m0s)
-      # - --txpool.lifetime=12h0m0s
+      - --txpool.lifetime=0h1m0s
       # Megabytes of memory allocated to internal caching (default: 1024)
       - --cache=4096
       # Maximum number of network peers (network disabled if set to 0) (default: 25)
