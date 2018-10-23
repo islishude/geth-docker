@@ -21,6 +21,8 @@ services:
       - --rpcvhosts=*
       # Minimum number of executable transaction slots guaranteed per account (default: 16)
       # - --txpool.accountslots=16
+      # Maximum number of non-executable transaction slots for all accounts (default: 1024)
+      # --txpool.globalqueue=1024
       # Maximum number of executable transaction slots for all accounts (default: 4096)
       - --txpool.globalslots=10000
       # Maximum amount of time non-executable transaction are queued (default: 3h0m0s)
