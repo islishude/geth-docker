@@ -17,8 +17,7 @@ services:
     stop_grace_period: 1m30s
     command:
       - --rpc
-      - --rpcapi
-      - "debug,eth,net,shh,txpool,web3"
+      - --rpcapi="eth,txpool,net,web3"
       - --rpcaddr=geth
       - --rpcvhosts=*
       # Maximum number of non-executable transaction slots for all accounts (default: 4096)
