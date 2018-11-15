@@ -3,7 +3,7 @@ version: "3"
 services:
 
   geth:
-    image: "ethereum/client-go:v1.8.17"
+    image: "ethereum/client-go:v1.8.18"
     restart: unless-stopped
     ports:
       - "30303:30303"
@@ -12,7 +12,7 @@ services:
       - ${PWD}/.ethereum:/root/.ethereum
     expose:
       - "8545"
-    networks: 
+    networks:
       - eth
     stop_signal: SIGINT
     stop_grace_period: 1m30s
