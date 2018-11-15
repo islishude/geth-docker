@@ -15,7 +15,8 @@ services:
     stop_grace_period: 2m
     command:
       - --rpc
-      - --rpcapi="eth,txpool,net,web3"
+      - --rpcapi
+      - "eth,txpool,net,web3"
       - --rpcaddr=0.0.0.0
       - --rpcvhosts=*
       # Minimum number of executable transaction slots guaranteed per account (default: 16)
