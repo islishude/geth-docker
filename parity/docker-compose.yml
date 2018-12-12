@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  parity:
+    image: "parity/parity:stable"
+    restart: unless-stopped
+    ports:
+      - "30303:30303"
+      - "30303:30303/udp"
+      - "8545:8545"
+    volumes:
+      - ${PWD}/.local:/home/parity/.local
+    stop_signal: SIGINT
+    stop_grace_period: 2m
+    command:
+      - --no-ui
+      - --no-dapps
+      - --no-config
+      - --no-ws
+      - --tracing=on
+      - --auto-update=none
+      - --max-peers=100
+      - --jsonrpc-interface=all
+      - --jsonrpc-apis=safe
+      - --jsonrpc-hosts=all
+      - --jsonrpc-threads=8
+      - --jsonrpc-cors=all
+      - --jsonrpc-server-threads=8
+      - --jsonrpc-max-payload=10
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
