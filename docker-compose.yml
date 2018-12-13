@@ -1,7 +1,6 @@
 version: "3"
 
 services:
-
   geth:
     image: "ethereum/client-go:v1.8.20"
     restart: unless-stopped
@@ -24,13 +23,15 @@ services:
       # Maximum number of non-executable transaction slots for all accounts (default: 1024)
       # --txpool.globalqueue=1024
       # Maximum number of executable transaction slots for all accounts (default: 4096)
-      - --txpool.globalslots=10000
+      # - --txpool.globalslots=10000
       # Maximum amount of time non-executable transaction are queued (default: 3h0m0s)
-      - --txpool.lifetime=0h1m0s
+      # - --txpool.lifetime=3h0m0s
       # Megabytes of memory allocated to internal caching (default: 1024)
-      - --cache=4096
+      # - --cache=4096
       # Maximum number of network peers (network disabled if set to 0) (default: 25)
-      - --maxpeers=100
+      # - --maxpeers=100
+      # Blockchain sync mode ("fast", "full", or "light")
+      # - --syncmode=fast
     logging:
       driver: "json-file"
       options:
