@@ -1,18 +1,22 @@
 # Geth Docker
 
 ## Start
-`docker-compose up -d`
+
+```bash
+# Chain data path
+mkdir .ethereum
+sudo chmod -R 777 .ethereum
+docker-compose up -d
+```
 
 ## Proxy
-See `proxy/docker-compose.yml`
+See `proxy/docker-compose.yml` and `proxy/nginx.conf`,and default proxy port is `10240`
 
 ## Proxy Auth
 
-```
-# ubuntu
+```bash
 # Install htpasswd
-apt install apache2-utils -y
+sudo apt install apache2-utils -y
 # Add to auth.txt
-htpasswd -c auth.txt YOUR-USERNAME
-# And input twice password
+htpasswd -c proxy/auth.txt YOUR-USERNAME
 ```
