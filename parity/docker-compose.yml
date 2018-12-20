@@ -9,7 +9,7 @@ services:
       - "30303:30303/udp"
       - "8545:8545"
     volumes:
-      - ${PWD}/.local:/home/parity/.local
+      - ${PWD}/.local:/home/parity/.local/share/io.parity.ethereum
     stop_signal: SIGINT
     stop_grace_period: 2m
     command:
