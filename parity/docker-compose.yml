@@ -2,14 +2,14 @@ version: "3"
 
 services:
   parity:
-    build: .
+    image: parity/parity:v2.2.10
     restart: unless-stopped
     ports:
       - "30303:30303"
       - "30303:30303/udp"
       - "8545:8545"
     volumes:
-      - ${PWD}/.local:/home/parity/.local/share/io.parity.ethereum
+      - ${PWD}/data:/home/parity/.local/share/io.parity.ethereum
     stop_signal: SIGINT
     stop_grace_period: 2m
     command:

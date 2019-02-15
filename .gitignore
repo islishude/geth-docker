@@ -2,3 +2,4 @@ log/*
 !log/.gitkeep
 .ethereum
 auth.txt
+data
