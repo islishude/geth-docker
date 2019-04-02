@@ -8,6 +8,7 @@ services:
       - "30303:30303"
       - "30303:30303/udp"
       - "8545:8545"
+      - "8546:8546"
     volumes:
       - ${PWD}/.ethereum:/root/.ethereum
     stop_signal: SIGINT
@@ -18,6 +19,9 @@ services:
       - "eth,txpool,net,web3"
       - --rpcaddr=0.0.0.0
       - --rpcvhosts=*
+      - --rpccorsdomain=*
+      - --ws
+      - --wsorigin=*
       # Minimum number of executable transaction slots guaranteed per account (default: 16)
       # - --txpool.accountslots=16
       # Maximum number of non-executable transaction slots for all accounts (default: 1024)
