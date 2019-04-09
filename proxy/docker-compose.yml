@@ -2,7 +2,7 @@ version: "3"
 
 services:
   geth:
-    image: "ethereum/client-go:v1.8.24"
+    image: "ethereum/client-go:v1.8.25"
     restart: unless-stopped
     ports:
       - "30303:30303"
