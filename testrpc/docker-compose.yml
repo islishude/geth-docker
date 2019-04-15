@@ -10,12 +10,10 @@ services:
       - "8545:8545"
       - "8546:8546"
     volumes:
-      - ${PWD}/.ethereum:/ethereum
+      - ${PWD}/.ethereum:/root/.ethereum
     stop_signal: SIGINT
     stop_grace_period: 2m
     command:
-      - --datadir
-      - /ethereum/chaindata
       - --rpc
       - --rpcaddr=0.0.0.0
       - --rpcvhosts=*
