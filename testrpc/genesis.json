@@ -9,13 +9,13 @@
     "constantinopleBlock": 0
   },
   "nonce": "0x0000000000000042",
-  "difficulty": "0x20000",
+  "difficulty": "0x9999",
   "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
   "timestamp": "0x00",
   "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
   "extraData": "0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa",
-  "gasLimit": "0x2fefd8",
-  "coinbase": "0x13C1B1751F84498C08Fb8b63978eF1857Bc4fBbC",
+  "gasLimit": "0x4c4b40",
+  "coinbase": "0x0000000000000000000000000000000000000000",
   "alloc": {
     "0x13C1B1751F84498C08Fb8b63978eF1857Bc4fBbC": {
       "balance": "0x3782dace9d90000000"
