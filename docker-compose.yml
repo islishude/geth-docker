@@ -21,7 +21,7 @@ services:
       - --rpcvhosts=*
       - --rpccorsdomain=*
       - --ws
-      - --wsorigin=*
+      - --wsorigins=*
       # Minimum number of executable transaction slots guaranteed per account (default: 16)
       # - --txpool.accountslots=16
       # Maximum number of non-executable transaction slots for all accounts (default: 1024)

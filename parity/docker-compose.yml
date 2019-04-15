@@ -8,6 +8,7 @@ services:
       - "30303:30303"
       - "30303:30303/udp"
       - "8545:8545"
+      - "8546:8546"
     volumes:
       - ${PWD}/data:/home/parity/.local/share/io.parity.ethereum
     stop_signal: SIGINT
@@ -16,7 +17,7 @@ services:
       - --no-ui
       - --no-dapps
       - --no-config
-      - --no-ws
+      - --ws-origins=*
       - --tracing=on
       - --auto-update=none
       - --max-peers=100
