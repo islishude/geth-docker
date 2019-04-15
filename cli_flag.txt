@@ -4,10 +4,10 @@ NAME:
    Copyright 2013-2018 The go-ethereum Authors
 
 USAGE:
-   geth.exe [options] command [command options] [arguments...]
+   geth [options] command [command options] [arguments...]
    
 VERSION:
-   1.8.23-stable-c9427004
+   1.8.26-stable-cdae1c59
    
 COMMANDS:
    account           Manage accounts
@@ -33,34 +33,34 @@ COMMANDS:
    help, h           Shows a list of commands or help for one command
    
 ETHEREUM OPTIONS:
-  --config value                                         TOML configuration file
-  --datadir "C:\Users\lishude\AppData\Roaming\Ethereum"  Data directory for the databases and keystore
-  --keystore                                             Directory for the keystore (default = inside the datadir)
-  --nousb                                                Disables monitoring for and managing USB hardware wallets
-  --networkid value                                      Network identifier (integer, 1=Frontier, 2=Morden (disused), 3=Ropsten, 4=Rinkeby) (default: 1)
-  --testnet                                              Ropsten network: pre-configured proof-of-work test network
-  --rinkeby                                              Rinkeby network: pre-configured proof-of-authority test network
-  --goerli                                               Görli network: pre-configured proof-of-authority test network
-  --syncmode "fast"                                      Blockchain sync mode ("fast", "full", or "light")
-  --gcmode value                                         Blockchain garbage collection mode ("full", "archive") (default: "full")
-  --ethstats value                                       Reporting URL of a ethstats service (nodename:secret@host:port)
-  --identity value                                       Custom node name
-  --lightserv value                                      Maximum percentage of time allowed for serving LES requests (0-90) (default: 0)
-  --lightpeers value                                     Maximum number of LES client peers (default: 100)
-  --lightkdf                                             Reduce key-derivation RAM & CPU usage at some expense of KDF strength
-  --whitelist value                                      Comma separated block number-to-hash mappings to enforce (<number>=<hash>)
+  --config value               TOML configuration file
+  --datadir "/root/.ethereum"  Data directory for the databases and keystore
+  --keystore                   Directory for the keystore (default = inside the datadir)
+  --nousb                      Disables monitoring for and managing USB hardware wallets
+  --networkid value            Network identifier (integer, 1=Frontier, 2=Morden (disused), 3=Ropsten, 4=Rinkeby) (default: 1)
+  --testnet                    Ropsten network: pre-configured proof-of-work test network
+  --rinkeby                    Rinkeby network: pre-configured proof-of-authority test network
+  --goerli                     Görli network: pre-configured proof-of-authority test network
+  --syncmode "fast"            Blockchain sync mode ("fast", "full", or "light")
+  --gcmode value               Blockchain garbage collection mode ("full", "archive") (default: "full")
+  --ethstats value             Reporting URL of a ethstats service (nodename:secret@host:port)
+  --identity value             Custom node name
+  --lightserv value            Maximum percentage of time allowed for serving LES requests (0-90) (default: 0)
+  --lightpeers value           Maximum number of LES client peers (default: 100)
+  --lightkdf                   Reduce key-derivation RAM & CPU usage at some expense of KDF strength
+  --whitelist value            Comma separated block number-to-hash mappings to enforce (<number>=<hash>)
   
 DEVELOPER CHAIN OPTIONS:
   --dev               Ephemeral proof-of-authority network with a pre-funded developer account, mining enabled
   --dev.period value  Block period to use in developer mode (0 = mine only if transaction pending) (default: 0)
   
 ETHASH OPTIONS:
-  --ethash.cachedir                                  Directory to store the ethash verification caches (default = inside the datadir)
-  --ethash.cachesinmem value                         Number of recent ethash caches to keep in memory (16MB each) (default: 2)
-  --ethash.cachesondisk value                        Number of recent ethash caches to keep on disk (16MB each) (default: 3)
-  --ethash.dagdir "C:\Users\lishude\AppData\Ethash"  Directory to store the ethash mining DAGs (default = inside home folder)
-  --ethash.dagsinmem value                           Number of recent ethash mining DAGs to keep in memory (1+GB each) (default: 1)
-  --ethash.dagsondisk value                          Number of recent ethash mining DAGs to keep on disk (1+GB each) (default: 2)
+  --ethash.cachedir                Directory to store the ethash verification caches (default = inside the datadir)
+  --ethash.cachesinmem value       Number of recent ethash caches to keep in memory (16MB each) (default: 2)
+  --ethash.cachesondisk value      Number of recent ethash caches to keep on disk (16MB each) (default: 3)
+  --ethash.dagdir "/root/.ethash"  Directory to store the ethash mining DAGs (default = inside home folder)
+  --ethash.dagsinmem value         Number of recent ethash mining DAGs to keep in memory (1+GB each) (default: 1)
+  --ethash.dagsondisk value        Number of recent ethash mining DAGs to keep on disk (1+GB each) (default: 2)
   
 TRANSACTION POOL OPTIONS:
   --txpool.locals value        Comma separated accounts to treat as locals (no flush, priority inclusion)
@@ -91,6 +91,7 @@ API AND CONSOLE OPTIONS:
   --rpcaddr value        HTTP-RPC server listening interface (default: "localhost")
   --rpcport value        HTTP-RPC server listening port (default: 8545)
   --rpcapi value         API's offered over the HTTP-RPC interface
+  --rpc.gascap value     Sets a cap on gas that can be used in eth_call/estimateGas (default: 0)
   --ws                   Enable the WS-RPC server
   --wsaddr value         WS-RPC server listening interface (default: "localhost")
   --wsport value         WS-RPC server listening port (default: 8546)
@@ -183,4 +184,3 @@ MISC OPTIONS:
 
 COPYRIGHT:
    Copyright 2013-2018 The go-ethereum Authors
-   
