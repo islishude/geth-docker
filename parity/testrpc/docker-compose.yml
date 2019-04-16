@@ -14,20 +14,19 @@ services:
     stop_signal: SIGINT
     stop_grace_period: 2m
     command:
+      - --chain
+      - /home/parity/genesis.json
       - --no-config
       - --tracing=on
       - --auto-update=none
-      - --max-peers=100
+      - --no-discovery
       - --jsonrpc-interface=all
-      - --ws-interface=all
-      - --jsonrpc-apis=safe
-      - --ws-apis=safe
+      - --jsonrpc-apis=all
       - --jsonrpc-hosts=all
-      - --ws-hosts=all
       - --jsonrpc-cors=all
       - --ws-origins=all
-      - --jsonrpc-server-threads=8
-      - --jsonrpc-max-payload=10
+      - --ws-hosts=all
+      - --ws-apis=all
     logging:
       driver: "json-file"
       options:
