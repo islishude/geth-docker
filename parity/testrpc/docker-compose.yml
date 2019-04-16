@@ -2,7 +2,7 @@ version: "3"
 
 services:
   parity:
-    image: parity/parity:v2.4.5
+    build: .
     restart: unless-stopped
     ports:
       - "30303:30303"
@@ -14,18 +14,22 @@ services:
     stop_signal: SIGINT
     stop_grace_period: 2m
     command:
-      - --chain
-      - /home/parity/genesis.json
       - --no-config
-      - --tracing=on
-      - --auto-update=none
       - --no-discovery
+      - --identity=testrpc
+      - --auto-update=none
+      - --tracing=on
+      - --chain=/home/parity/genesis.json
+      - --unsafe-expose=all
+      - --min-gas-price=0
+      - --ipc-apis=all
+      - --jsonrpc-experimental
       - --jsonrpc-interface=all
       - --jsonrpc-apis=all
-      - --jsonrpc-hosts=all
       - --jsonrpc-cors=all
+      - --jsonrpc-server-threads=4
+      - --ws-interface=all
       - --ws-origins=all
-      - --ws-hosts=all
       - --ws-apis=all
     logging:
       driver: "json-file"
