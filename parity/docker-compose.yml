@@ -14,8 +14,6 @@ services:
     stop_signal: SIGINT
     stop_grace_period: 2m
     command:
-      - --no-ui
-      - --no-dapps
       - --no-config
       - --ws-origins=*
       - --tracing=on
