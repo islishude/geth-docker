@@ -1,4 +1,4 @@
-FROM ethereum/client-go:v1.8.26
+FROM ethereum/client-go:v1.8.27
 WORKDIR /root/.ethereum
 VOLUME [ "/root/.ethereum" ]
 COPY genesis.json ./
