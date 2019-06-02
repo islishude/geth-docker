@@ -8,7 +8,7 @@ services:
       - "8545:8545"
       - "8546:8546"
     volumes:
-      - ${PWD}/.ethereum:/root/.ethereum
+      - ${PWD}/.ethereum/:/geth/.ethereum/
     stop_signal: SIGINT
     stop_grace_period: 2m
     command:

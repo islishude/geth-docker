@@ -2,6 +2,22 @@
 
 Each of the following accounts has 1024ETH
 
+### Start
+
+```shell
+#!/bin/sh
+mkdir .ethereum
+docker-compose up -d
+```
+
+### ImportRawKey
+
+```shell
+docker-compose exec geth sh
+geth attach
+person.importRawKey("RAW KEY WITHOUT 0x SEE BLOW", "YOUR-PASSWORD")
+```
+
 ### BIP39 Mnemonic
 
 awful negative waste juice love truth nose coffee top legend method imitate
