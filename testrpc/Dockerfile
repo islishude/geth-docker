@@ -1,4 +1,4 @@
-FROM ethereum/client-go:v1.8.27
+FROM ethereum/client-go:v1.9.0
 RUN adduser -D --shell /bin/sh --home /geth geth
 USER geth
 WORKDIR /geth
