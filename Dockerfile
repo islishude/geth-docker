@@ -1,7 +1,7 @@
 FROM golang:1.12-alpine as builder
 RUN apk add --no-cache make gcc musl-dev linux-headers 
 WORKDIR /
-RUN wget https://github.com/ethereum/go-ethereum/archive/v1.9.0.tar.gz -O geth.tar.gz
+RUN wget https://github.com/ethereum/go-ethereum/archive/v1.9.1.tar.gz -O geth.tar.gz
 RUN tar zxvf geth.tar.gz
 RUN cd /go-ethereum-1.8.27 && make geth
 
