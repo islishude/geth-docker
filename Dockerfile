@@ -1,12 +1,16 @@
-FROM golang:1.12-alpine as builder
-RUN apk add --no-cache make gcc musl-dev linux-headers 
-WORKDIR /
-RUN wget https://github.com/ethereum/go-ethereum/archive/v1.9.6.tar.gz -O geth.tar.gz
-RUN tar zxvf geth.tar.gz
-RUN cd /go-ethereum-1.9.6 && make geth
+FROM golang:1.13.4-alpine as BUILDER
 
-FROM alpine:latest
-RUN apk add --no-cache ca-certificates
-COPY --from=builder /go-ethereum-1.9.6/build/bin/geth /usr/local/bin/
+ARG VERSION=v1.9.7
+RUN apk add --no-cache make gcc musl-dev linux-headers git ca-certificates
+WORKDIR /
+RUN git clone https://github.com/ethereum/go-ethereum geth
+RUN cd geth && git checkout ${VERSION} && make geth
+
+FROM alpine:3.10
+RUN addgroup -g 1000 geth && adduser -u 1000 -G geth -s /bin/sh -D geth
+COPY --from=BUILDER /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=BUILDER /geth/build/bin/geth /usr/local/bin/
 EXPOSE 8545 8546 30303 30303/udp
+USER geth
+VOLUME [ "/home/geth" ]
 ENTRYPOINT ["/usr/local/bin/geth"]
