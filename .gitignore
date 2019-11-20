@@ -4,3 +4,4 @@ log/*
 .parity
 auth.txt
 data
+chaindata
