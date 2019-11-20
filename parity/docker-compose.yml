@@ -2,7 +2,7 @@ version: "3"
 
 services:
   parity:
-    image: parity/parity:v2.5.9-stable
+    image: parity/parity:v2.5.10-stable
     restart: unless-stopped
     ports:
       - "30303:30303"
