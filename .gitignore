@@ -1,7 +1,1 @@
-log/*
-!log/.gitkeep
-.ethereum
-.parity
-auth.txt
-data
 chaindata

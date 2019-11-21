@@ -12,6 +12,7 @@ COPY --from=BUILDER /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=BUILDER /geth/build/bin/geth /usr/local/bin/
 EXPOSE 8545 8546 30303 30303/udp
 USER geth
+WORKDIR /home/geth
 STOPSIGNAL SIGINT
 VOLUME [ "/home/geth/.ethereum" ]
 ENTRYPOINT ["/usr/local/bin/geth"]
