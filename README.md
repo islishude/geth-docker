@@ -2,16 +2,19 @@
 
 ## Production node
 
+**Don't run container by root!**
+
 ```shell
 # make sure that YOUR uid is 1000 or create it
-# groupadd -g 1000 -r geth && useradd -g 1000 -D -r -u 1000 geth
-# chmod -aG docker geth && su geth
-docker pull islishude/geth
-mkdir chaindata
-docker run -d -p 8545:8545 -p 30330:30330 -v $(pwd)/chaindata:/home/geth/.ethereum islishude/geth
+groupadd -g 1000 -r geth && useradd -g 1000 -D -r -u 1000 geth
+chmod -aG docker geth
 ```
 
-**Don't run it by root!**
+```shell
+docker pull islishude/geth
+mkdir chaindata
+docker run -d -p 8545:8545 -p 30330:30330 -v $(pwd)/chaindata:/home/geth/.ethereum -u 1000 islishude/geth
+```
 
 ## Private chain and test node
 
@@ -24,7 +27,7 @@ mkdir -p chaindata
 # init genesis data for test environment
 docker run --rm -v $(pwd)/chaindata:/home/geth/.ethereum \
   -v $(pwd)/genesis.json:/home/geth/genesis.json:ro \
-  islishude/geth init genesis.json
+  -u 1000 islishude/geth init genesis.json
 # use flowing docker-compose config and start testrpc
 docker-compose up -d
 ```
@@ -41,6 +44,7 @@ services:
     ports:
       - "8545:8545"
       - "8546:8546"
+    user: geth
     volumes:
       - ${PWD}/chaindata:/home/geth/.ethereum/
     stop_signal: SIGINT
