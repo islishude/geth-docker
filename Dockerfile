@@ -1,10 +1,10 @@
 FROM golang:1.13.4-alpine as BUILDER
-ARG VERSION=v1.9.7
-ENV GO111MODULE=off
+ARG VERSION=v1.9.8
+ENV GO111MODULE=on
 RUN apk add --no-cache make gcc musl-dev linux-headers git ca-certificates
-WORKDIR /
-RUN git clone --quiet --branch ${VERSION} --depth 1 https://github.com/ethereum/go-ethereum geth
-RUN cd geth && make geth
+WORKDIR /geth
+RUN git clone --quiet --branch ${VERSION} --depth 1 https://github.com/ethereum/go-ethereum .
+RUN make geth
 
 FROM alpine:3.10
 RUN addgroup -g 1000 geth && adduser -u 1000 -G geth -s /bin/sh -D geth
