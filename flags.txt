@@ -7,7 +7,7 @@ USAGE:
    geth [options] command [command options] [arguments...]
 
 VERSION:
-   1.9.7-stable-a718daa6
+   1.9.8-stable-d62e9b28
 
 COMMANDS:
    account                            Manage accounts
@@ -34,7 +34,7 @@ COMMANDS:
 
 ETHEREUM OPTIONS:
   --config value                      TOML configuration file
-  --datadir value                     Data directory for the databases and keystore (default: "/home/geth/.ethereum")
+  --datadir value                     Data directory for the databases and keystore (default: "/root/.ethereum")
   --datadir.ancient value             Data directory for ancient chain segments (default = inside chaindata)
   --keystore value                    Directory for the keystore (default = inside the datadir)
   --nousb                             Disables monitoring for and managing USB hardware wallets
@@ -59,16 +59,16 @@ LIGHT CLIENT OPTIONS:
   --ulc.servers value                 List of trusted ultra-light servers
   --ulc.fraction value                Minimum % of trusted ultra-light servers required to announce a new head (default: 75)
   --ulc.onlyannounce                  Ultra light server sends announcements only
-
+  
 DEVELOPER CHAIN OPTIONS:
   --dev                               Ephemeral proof-of-authority network with a pre-funded developer account, mining enabled
   --dev.period value                  Block period to use in developer mode (0 = mine only if transaction pending) (default: 0)
-
+  
 ETHASH OPTIONS:
   --ethash.cachedir value             Directory to store the ethash verification caches (default = inside the datadir)
   --ethash.cachesinmem value          Number of recent ethash caches to keep in memory (16MB each) (default: 2)
   --ethash.cachesondisk value         Number of recent ethash caches to keep on disk (16MB each) (default: 3)
-  --ethash.dagdir value               Directory to store the ethash mining DAGs (default: "/home/geth/.ethash")
+  --ethash.dagdir value               Directory to store the ethash mining DAGs (default: "/root/.ethash")
   --ethash.dagsinmem value            Number of recent ethash mining DAGs to keep in memory (1+GB each) (default: 1)
   --ethash.dagsondisk value           Number of recent ethash mining DAGs to keep on disk (1+GB each) (default: 2)
 
