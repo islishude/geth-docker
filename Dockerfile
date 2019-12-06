@@ -1,4 +1,4 @@
-FROM golang:1.13.4-alpine as BUILDER
+FROM golang:1.13.5-alpine as BUILDER
 ARG VERSION=v1.9.8
 ENV GO111MODULE=on
 RUN apk add --no-cache make gcc musl-dev linux-headers git ca-certificates
