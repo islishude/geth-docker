@@ -2,7 +2,7 @@ version: "3"
 
 services:
   geth:
-    image: "islishude/geth:v1.9.7"
+    image: "islishude/geth:1.9.9"
     restart: unless-stopped
     ports:
       - "30303:30303"
