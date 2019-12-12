@@ -13,7 +13,9 @@ chmod -aG docker geth
 ```shell
 docker pull islishude/geth
 mkdir chaindata
-docker run -d -p 8545:8545 -p 30330:30330 -v $(pwd)/chaindata:/home/geth/.ethereum -u 1000 islishude/geth
+docker run -d -p 8545:8545 -p 30330:30330 \
+  -v $(pwd)/chaindata:/home/geth/.ethereum \
+  --name geth -u 1000 islishude/geth
 ```
 
 ## Private chain and test node
@@ -27,7 +29,8 @@ mkdir -p chaindata
 # init genesis data for test environment
 docker run --rm -v $(pwd)/chaindata:/home/geth/.ethereum \
   -v $(pwd)/genesis.json:/home/geth/genesis.json:ro \
-  -u 1000 islishude/geth init genesis.json
+  -w /home/geth -u 1000 \
+  islishude/geth init genesis.json
 # use flowing docker-compose config and start testrpc
 docker-compose up -d
 ```
