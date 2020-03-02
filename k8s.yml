@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gethrpc
+spec:
+  ports:
+    - protocol: TCP
+      port: 8545
+      nodePort: 38545
+      name: jsonrpc
+    - protocol: TCP
+      port: 8546
+      nodePort: 38546
+      name: websoket
+  clusterIP: None
+  selector:
+    app: geth-node
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: geth
+spec:
+  selector:
+    matchLabels:
+      app: geth-node
+  replicas: 2
+  serviceName: gethrpc
+  template:
+    metadata:
+      namespace: wallet
+      label:
+        app: geth-node
+    spec:
+      containers:
+        - name: geth
+          image: ethereum/go-ethereum:v1.9.11
+          resources:
+            limits: { cpu: "8000m", memory: "16G" }
+            requests: { cpu: "8000m", memory: "16G" }
+          ports:
+            - containerPort: 8545
+            - containerPort: 8546
+            - { containerPort: 30303, protocol: TCP }
+            - { containerPort: 30303, protocol: UDP }
+          args:
+            [
+              "--rpc",
+              "--rpcapi",
+              "eth,txpool,net,web3",
+              "--rpcvhosts=*",
+              "--rpccorsdomain=*",
+              "--ws",
+              "--wsorigin=*",
+              "--datadir",
+              "/home/geth",
+            ]
+          volumeMounts:
+            - name: chaindata
+              mountPath: /home/geth
+      volumeClaimTemplates:
+        - metadata:
+            name: chaindata
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            storageClassName: YOUR_STORAGE_CLASS_NAME
+            resources:
+              requests:
+                storage: 500Gi
