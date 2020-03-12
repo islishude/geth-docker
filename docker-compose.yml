@@ -15,7 +15,6 @@ services:
       - ${PWD}/chaindata:/home/geth/.ethereum
     stop_signal: SIGINT
     stop_grace_period: 2m
-    user: geth
     command:
       - --rpc
       - --rpcapi
