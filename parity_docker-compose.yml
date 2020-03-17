@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+    parity:
+        image: parity/parity:v2.7.2-stable
+        ports:
+            - "30303:30303"
+            - "30303:30303/udp"
+            - "8545:8545"
+        volumes:
+            - /data/parity:/data/parity
+        stop_signal: SIGINT
+        stop_grace_period: 2m
+        command:
+            - --no-ipc
+            - --no-ws
+            - --no-secretstore
+            - --base-path=/data/parity
+            - --no-download
+            - --no-config
+            - --auto-update=none
+            - --tracing=on
+            - --jsonrpc-interface=all
+            - --jsonrpc-apis=safe
+            - --jsonrpc-hosts=all
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "200k"
+                max-file: "10"
