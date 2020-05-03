@@ -1,5 +1,6 @@
 {
   "$source": "https://github.com/ethereum/go-ethereum/blob/master/params/config.go#L278",
+  "$mnemonic": "awful negative waste juice love truth nose coffee top legend method imitate",
   "config": {
     "chainId": 1,
     "homesteadBlock": 0,
