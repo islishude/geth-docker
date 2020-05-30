@@ -2,7 +2,7 @@ version: "3"
 
 services:
     parity:
-        image: parity/parity:v2.7.2-stable
+        image: openethereum/openethereum:v3.0.0
         ports:
             - "30303:30303"
             - "30303:30303/udp"
@@ -26,5 +26,5 @@ services:
         logging:
             driver: "json-file"
             options:
-                max-size: "200k"
+                max-size: "2m"
                 max-file: "10"

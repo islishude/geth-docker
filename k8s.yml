@@ -12,6 +12,10 @@ spec:
       port: 8546
       nodePort: 38546
       name: websoket
+    - protocol: TCP
+      port: 8547
+      nodePort: 38547
+      name: graphql
   clusterIP: None
   selector:
     app: geth-node
@@ -46,19 +50,26 @@ spec:
             - { containerPort: 30303, protocol: UDP }
           args:
             [
-              "--rpc",
-              "--rpcapi",
+              "--http",
+              "--http.api",
               "eth,txpool,net,web3",
-              "--rpcvhosts=*",
-              "--rpccorsdomain=*",
+              "--http.vhosts=*",
+              "--http.corsdomain=*",
               "--ws",
-              "--wsorigin=*",
+              "--ws.addr=0.0.0.0",
+              "--ws.origin=*",
+              "--ws.api",
+              "eth,net,web3,txpoll",
+              "--graphql",
+              "--graphql.addr=0.0.0.0",
+              "--graphql.corsdomain=*",
+              "--graphql.vhosts=*",
               "--datadir",
-              "/home/geth",
+              "/chaindata",
             ]
           volumeMounts:
             - name: chaindata
-              mountPath: /home/geth
+              mountPath: /chaindata
       volumeClaimTemplates:
         - metadata:
             name: chaindata

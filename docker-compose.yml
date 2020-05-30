@@ -9,22 +9,31 @@ services:
       - "30303:30303/udp"
       - "8545:8545"
       - "8546:8546"
+      - "8547:8547"
     user: geth
-    working_dir: /home/geth
     volumes:
-      - ${PWD}/chaindata:/home/geth/.ethereum
+      - ${PWD}/chaindata:/chaindata
     stop_signal: SIGINT
     stop_grace_period: 2m
     command:
-      - --rpc
-      - --rpcapi
-      - "eth,txpool,net,web3"
-      - --rpcaddr=0.0.0.0
-      - --rpcvhosts=*
-      - --rpccorsdomain=*
-      - --ws
-      - --wsorigins=*
       - --nousb
+      - --http
+      - --http.api
+      - "eth,txpool,net,web3"
+      - --http.adddr=0.0.0.0
+      - --http.vhosts=*
+      - --hhtp.corsdomain=*
+      - --ws
+      - --ws.origins=*
+      - --ws.addr=0.0.0.0
+      - --ws.api
+      - "eth,net,web3,txpoll"
+      - --graphql
+      - --graphql.addr=0.0.0.0
+      - --graphql.corsdomain=*
+      - --graphql.vhosts=*
+      - --datadir
+      - "/chaindata"
       # Minimum number of executable transaction slots guaranteed per account (default: 16)
       # - --txpool.accountslots=16
       # Maximum number of non-executable transaction slots for all accounts (default: 1024)
@@ -39,8 +48,10 @@ services:
       # - --maxpeers=100
       # Blockchain sync mode ("fast", "full", or "light")
       # - --syncmode=fast
+      # Blockchain garbage collection mode ("full", "archive") (default: "full")
+      # - --gcmode=full
     logging:
       driver: "json-file"
       options:
-        max-size: "200k"
+        max-size: "2m"
         max-file: "10"
