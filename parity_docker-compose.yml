@@ -7,15 +7,14 @@ services:
             - "30303:30303"
             - "30303:30303/udp"
             - "8545:8545"
+            - "8546:8546"
         volumes:
-            - /data/parity:/data/parity
+            - /chaindata/openethereum:/chaindata
         stop_signal: SIGINT
         stop_grace_period: 2m
         command:
-            - --no-ipc
-            - --no-ws
             - --no-secretstore
-            - --base-path=/data/parity
+            - --base-path=/chaindata
             - --no-download
             - --no-config
             - --auto-update=none
@@ -23,6 +22,10 @@ services:
             - --jsonrpc-interface=all
             - --jsonrpc-apis=safe
             - --jsonrpc-hosts=all
+            - --ws-interface=all
+            - --ws-apis=safe
+            - --ws-origins=all
+            - --ws-hosts=all
         logging:
             driver: "json-file"
             options:

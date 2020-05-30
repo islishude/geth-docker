@@ -33,19 +33,19 @@ spec:
   serviceName: gethrpc
   template:
     metadata:
-      namespace: wallet
       label:
         app: geth-node
     spec:
       containers:
         - name: geth
-          image: ethereum/go-ethereum:v1.9.11
+          image: ethereum/go-ethereum:v1.9.14
           resources:
             limits: { cpu: "8000m", memory: "16G" }
             requests: { cpu: "8000m", memory: "16G" }
           ports:
             - containerPort: 8545
             - containerPort: 8546
+            - containerPort: 8547
             - { containerPort: 30303, protocol: TCP }
             - { containerPort: 30303, protocol: UDP }
           args:
