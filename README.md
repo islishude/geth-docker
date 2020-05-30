@@ -6,9 +6,7 @@
 docker pull islishude/geth
 mkdir -p -m 777 /chaindata/geth
 
-docker run -d -p 8545:8545 -p 30330:30330 -v /chaindata/geth:/chaindata
-  islishude/geth --datadir=/chaindata \
-  --http --http.api="eth" --http.addr=0.0.0.0 --http.vhosts=*
+docker run -v /chaindata:/chaindata islishude/geth --datadir=/chaindata
 ```
 
 ## For Development
