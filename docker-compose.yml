@@ -19,7 +19,7 @@ services:
       - --nousb
       - --http
       - --http.api
-      - "eth,txpool,net,web3"
+      - "eth,net,web3"
       - --http.adddr=0.0.0.0
       - --http.vhosts=*
       - --hhtp.corsdomain=*
@@ -27,7 +27,7 @@ services:
       - --ws.origins=*
       - --ws.addr=0.0.0.0
       - --ws.api
-      - "eth,net,web3,txpoll"
+      - "eth,net,web3"
       - --graphql
       - --graphql.addr=0.0.0.0
       - --graphql.corsdomain=*
