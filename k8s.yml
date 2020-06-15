@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: geth
-          image: ethereum/client-go:v1.9.14
+          image: ethereum/client-go:v1.9.15
           resources:
             limits: { cpu: "8000m", memory: "16G" }
             requests: { cpu: "8000m", memory: "16G" }

@@ -1,5 +1,5 @@
 FROM golang:1.14-alpine as BUILDER
-ARG VERSION=v1.9.14
+ARG VERSION=v1.9.15
 ENV GO111MODULE=on
 RUN apk add --no-cache make gcc musl-dev linux-headers git ca-certificates
 WORKDIR /geth
