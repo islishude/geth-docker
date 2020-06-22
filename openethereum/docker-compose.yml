@@ -2,14 +2,14 @@ version: "3"
 
 services:
     parity:
-        image: openethereum/openethereum:v3.0.0
+        image: openethereum/openethereum:v3.0.1
         ports:
             - "30303:30303"
             - "30303:30303/udp"
             - "8545:8545"
             - "8546:8546"
         volumes:
-            - /chaindata/openethereum:/chaindata
+            - /chaindata:/chaindata
         stop_signal: SIGINT
         stop_grace_period: 2m
         command:

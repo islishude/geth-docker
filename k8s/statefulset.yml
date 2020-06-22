@@ -1,26 +1,3 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: gethrpc
-spec:
-  ports:
-    - protocol: TCP
-      port: 8545
-      nodePort: 38545
-      name: jsonrpc
-    - protocol: TCP
-      port: 8546
-      nodePort: 38546
-      name: websoket
-    - protocol: TCP
-      port: 8547
-      nodePort: 38547
-      name: graphql
-  clusterIP: None
-  selector:
-    app: geth-node
-
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -51,21 +28,18 @@ spec:
           args:
             [
               "--http",
-              "--http.api",
-              "eth,txpool,net,web3",
+              "--http.api=eth,txpool,net,web3",
               "--http.vhosts=*",
               "--http.corsdomain=*",
               "--ws",
               "--ws.addr=0.0.0.0",
               "--ws.origin=*",
-              "--ws.api",
-              "eth,net,web3,txpoll",
+              "--ws.api=eth,net,web3,txpool",
               "--graphql",
               "--graphql.addr=0.0.0.0",
               "--graphql.corsdomain=*",
               "--graphql.vhosts=*",
-              "--datadir",
-              "/chaindata",
+              "--datadir=/chaindata",
             ]
           volumeMounts:
             - name: chaindata

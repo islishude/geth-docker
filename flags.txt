@@ -7,7 +7,7 @@ USAGE:
    geth [options] command [command options] [arguments...]
    
 VERSION:
-   1.9.14-stable-6d74d1e5
+   1.9.15-stable-0f77f34b
    
 COMMANDS:
    account                            Manage accounts
@@ -44,6 +44,7 @@ ETHEREUM OPTIONS:
   --networkid value                   Network identifier (integer, 1=Frontier, 3=Ropsten, 4=Rinkeby, 5=Görli) (default: 1)
   --goerli                            Görli network: pre-configured proof-of-authority test network
   --rinkeby                           Rinkeby network: pre-configured proof-of-authority test network
+  --yolov1                            YOLOv1 network: pre-configured proof-of-authority shortlived test network.
   --ropsten                           Ropsten network: pre-configured proof-of-work test network
   --syncmode value                    Blockchain sync mode ("fast", "full", or "light") (default: fast)
   --exitwhensynced                    Exits after block synchronisation completes

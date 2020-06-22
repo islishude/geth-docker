@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gethrpc
+spec:
+  ports:
+    - protocol: TCP
+      port: 8545
+      nodePort: 38545
+      name: jsonrpc
+    - protocol: TCP
+      port: 8546
+      nodePort: 38546
+      name: websoket
+    - protocol: TCP
+      port: 8547
+      nodePort: 38547
+      name: graphql
+  clusterIP: None
+  selector:
+    app: geth-node

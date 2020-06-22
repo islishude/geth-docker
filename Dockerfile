@@ -12,4 +12,4 @@ COPY --from=BUILDER /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=BUILDER /geth/build/bin/geth /usr/local/bin/
 EXPOSE 8545 8546 8547 30303 30303/udp
 STOPSIGNAL SIGINT
-ENTRYPOINT ["/usr/local/bin/geth"]
+ENTRYPOINT ["geth"]
