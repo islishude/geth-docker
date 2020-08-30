@@ -3,19 +3,17 @@ kind: Service
 metadata:
   name: gethrpc
 spec:
+  type: NodePort
   ports:
     - protocol: TCP
+      targetPort: 8545
       port: 8545
-      nodePort: 38545
-      name: jsonrpc
+      nodePort: 31000
+      name: http
     - protocol: TCP
+      targetPort: 8546
       port: 8546
-      nodePort: 38546
+      nodePort: 31002
       name: websoket
-    - protocol: TCP
-      port: 8547
-      nodePort: 38547
-      name: graphql
-  clusterIP: None
   selector:
     app: geth-node

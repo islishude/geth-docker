@@ -1,5 +1,5 @@
-FROM golang:1.14-alpine as BUILDER
-ARG VERSION=v1.9.17
+FROM golang:1.15-alpine as BUILDER
+ARG VERSION=v1.9.20
 ENV GO111MODULE=on
 RUN apk add --no-cache make gcc musl-dev linux-headers git ca-certificates
 WORKDIR /geth
@@ -10,6 +10,6 @@ FROM alpine:3.12
 RUN addgroup -g 1000 geth && adduser -u 1000 -G geth -s /bin/sh -D geth
 COPY --from=BUILDER /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=BUILDER /geth/build/bin/geth /usr/local/bin/
-EXPOSE 8545 8546 8547 30303 30303/udp
+EXPOSE 8545 8546 30303 30303/udp
 STOPSIGNAL SIGINT
 ENTRYPOINT ["geth"]

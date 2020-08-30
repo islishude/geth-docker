@@ -2,17 +2,16 @@ version: "3"
 
 services:
   geth:
-    image: ethereum/go-client:v1.9.17
+    image: ethereum/go-client:v1.9.20
     restart: unless-stopped
     ports:
       - "30303:30303"
       - "30303:30303/udp"
       - "8545:8545"
       - "8546:8546"
-      - "8547:8547"
     user: geth
     volumes:
-      - ${PWD}/chaindata:/chaindata
+      - ./chaindata:/chaindata
     stop_signal: SIGINT
     stop_grace_period: 2m
     command:
@@ -29,7 +28,6 @@ services:
       - --ws.api
       - "eth,net,web3"
       - --graphql
-      - --graphql.addr=0.0.0.0
       - --graphql.corsdomain=*
       - --graphql.vhosts=*
       - --datadir

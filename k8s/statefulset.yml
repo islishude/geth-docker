@@ -6,50 +6,54 @@ spec:
   selector:
     matchLabels:
       app: geth-node
-  replicas: 2
+  replicas: 1
   serviceName: gethrpc
   template:
     metadata:
-      label:
+      labels:
         app: geth-node
     spec:
+      terminationGracePeriodSeconds: 120
       containers:
         - name: geth
-          image: ethereum/client-go:v1.9.17
-          resources:
-            limits: { cpu: "8000m", memory: "16G" }
-            requests: { cpu: "8000m", memory: "16G" }
+          image: ethereum/client-go:v1.9.20
           ports:
             - containerPort: 8545
             - containerPort: 8546
-            - containerPort: 8547
             - { containerPort: 30303, protocol: TCP }
             - { containerPort: 30303, protocol: UDP }
-          args:
-            [
+          args: [
+              "--nousb",
+              # "--dev",
+              "--ipcpath=/ipc/geth.jsonrpc",
+              "--datadir=/chaindata",
               "--http",
-              "--http.api=eth,txpool,net,web3",
+              "--http.addr=0.0.0.0",
+              "--http.api=eth,net,web3",
               "--http.vhosts=*",
               "--http.corsdomain=*",
               "--ws",
               "--ws.addr=0.0.0.0",
-              "--ws.origin=*",
-              "--ws.api=eth,net,web3,txpool",
+              "--ws.api=eth,net,web3",
+              "--ws.origins=*",
               "--graphql",
-              "--graphql.addr=0.0.0.0",
               "--graphql.corsdomain=*",
               "--graphql.vhosts=*",
-              "--datadir=/chaindata",
             ]
           volumeMounts:
             - name: chaindata
               mountPath: /chaindata
-      volumeClaimTemplates:
-        - metadata:
-            name: chaindata
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            storageClassName: YOUR_STORAGE_CLASS_NAME
-            resources:
-              requests:
-                storage: 500Gi
+            - name: ipc
+              mountPath: /ipc
+      volumes:
+        - name: ipc
+          emptyDir: {}
+  volumeClaimTemplates:
+    - metadata:
+        name: "chaindata"
+      spec:
+        storageClassName: standard # CHANGE HERE!
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi # CHANGE HERE!
