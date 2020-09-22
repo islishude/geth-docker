@@ -1,7 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: blockchain-node
+
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: geth
+  name: geth-node
+  namespace: blockchain-node
 spec:
   selector:
     matchLabels:
@@ -16,7 +23,7 @@ spec:
       terminationGracePeriodSeconds: 120
       containers:
         - name: geth
-          image: ethereum/client-go:v1.9.20
+          image: ethereum/client-go:v1.9.21
           ports:
             - containerPort: 8545
             - containerPort: 8546
@@ -24,7 +31,7 @@ spec:
             - { containerPort: 30303, protocol: UDP }
           args: [
               "--nousb",
-              # "--dev",
+              "--dev", # CHANGE HERE!
               "--ipcpath=/ipc/geth.jsonrpc",
               "--datadir=/chaindata",
               "--http",
@@ -57,3 +64,23 @@ spec:
         resources:
           requests:
             storage: 10Gi # CHANGE HERE!
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gethrpc
+  namespace: blockchain-node
+spec:
+  ports:
+    - protocol: TCP
+      targetPort: 8545
+      port: 8545
+      name: http
+    - protocol: TCP
+      targetPort: 8546
+      port: 8546
+      name: websoket
+  clusterIP: None
+  selector:
+    app: geth-node
