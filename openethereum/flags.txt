@@ -5,47 +5,27 @@ OpenEthereum Client.
     Copyright 2015-2020 Parity Technologies (UK) Ltd.
     License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 
-parity [options]
-parity [options] daemon <PID-FILE>
-parity [options] account new 
-parity [options] account list 
-parity [options] account import <PATH>...
-parity [options] wallet import <PATH>
-parity [options] import --format=[FORMAT] [FILE]
-parity [options] export blocks --format=[FORMAT] --from=[BLOCK] --to=[BLOCK] [FILE]
-parity [options] export state [--no-storage] [--no-code] --min-balance=[WEI] --max-balance=[WEI] --at=[BLOCK]
+openethereum [options]
+openethereum [options] daemon <PID-FILE>
+openethereum [options] account new
+openethereum [options] account list
+openethereum [options] account import <PATH>...
+openethereum [options] wallet import <PATH>
+openethereum [options] import --format=[FORMAT] [FILE]
+openethereum [options] export blocks --format=[FORMAT] --from=[BLOCK] --to=[BLOCK] [FILE]
+openethereum [options] export state [--no-storage] [--no-code] --min-balance=[WEI] --max-balance=[WEI] --at=[BLOCK]
     --format=[FORMAT] [FILE]
-parity [options] signer new-token 
-parity [options] signer list 
-parity [options] signer sign [ID]
-parity [options] signer reject <ID>
-parity [options] snapshot --at=[BLOCK] <FILE>
-parity [options] restore [FILE]
-parity [options] tools hash <FILE>
-parity [options] db kill 
-parity [options] db reset <NUM>
-parity [options] export-hardcoded-sync 
-parity [options] dapp <PATH>
+openethereum [options] signer new-token
+openethereum [options] signer list
+openethereum [options] signer sign [ID]
+openethereum [options] signer reject <ID>
+openethereum [options] snapshot --at=[BLOCK] <FILE>
+openethereum [options] restore [FILE]
+openethereum [options] tools hash <FILE>
+openethereum [options] db kill
+openethereum [options] db reset <NUM>
 
 Operating Options:
-    --no-download
-        Normally new releases will be downloaded ready for updating. This disables it. Not recommended.
-
-    --no-consensus
-        Force the binary to run even if there are known issues regarding consensus. Not recommended.
-
-    --light
-        Experimental: run in light client mode. Light clients synchronize a bare minimum of data and fetch necessary
-        data on-demand from the network. Much lower in storage, potentially higher in bandwidth. Has no effect with
-        subcommands.
-
-    --no-hardcoded-sync
-        By default, if there is no existing database the light client will automatically jump to a block hardcoded in
-        the chain's specifications. This disables this feature.
-
-    --force-direct
-        Run the originally installed version of Parity, ignoring any updates that have since been installed.
-
     --mode=[MODE]
         Set the operating mode. MODE can be one of: last - Uses the last-used mode, active if none; active - Parity
         continuously syncs the chain; passive - Parity syncs initially, then sleeps and wakes regularly to resync; dark
@@ -57,25 +37,10 @@ Operating Options:
     --mode-alarm=[SECS]
         Specify the number of seconds before auto sleep reawake timeout occurs when mode is passive (default: 3600)
 
-    --auto-update=[SET]
-        Set a releases set to automatically update and install. SET can be one of: all - All updates in the our release
-        track; critical - Only consensus/security updates; none - No updates will be auto-installed. (default: critical)
-
-    --auto-update-delay=[NUM]
-        Specify the maximum number of blocks used for randomly delaying updates. (default: 100)
-
-    --auto-update-check-frequency=[NUM]
-        Specify the number of blocks between each auto-update check. (default: 20)
-
-    --release-track=[TRACK]
-        Set which release track we should use for updates. TRACK can be one of: stable - Stable releases; nightly -
-        Nightly releases (unstable); testing - Testing releases (do not use); current - Whatever track this executable
-        was released on. (default: current)
-
     --chain=[CHAIN]
-        Specify the blockchain type. CHAIN may be either a JSON chain specification file or ethereum, classic, classic-
-        no-phoenix, poacore, xdai, volta, ewc, musicoin, ellaism, mix, callisto, ethercore, mordor, ropsten,
-        kovan, rinkeby, goerli, kotti, poasokol, testnet, evantestcore, evancore or dev. (default: foundation)
+        Specify the blockchain type. CHAIN may be either a JSON chain specification file or ethereum, poacore, xdai,
+        volta, ewc, musicoin, ellaism, mix, callisto, morden, ropsten, kovan, rinkeby, goerli, poasokol, testnet, or
+        dev. (default: foundation)
 
     --keys-path=[PATH]
         Specify the path for JSON key files to be found (default: $BASE/keys)
@@ -92,16 +57,16 @@ Operating Options:
 Convenience Options:
     --unsafe-expose
         All servers will listen on external interfaces and will be remotely accessible. It's equivalent with setting the
-        following: --[ws,jsonrpc,secretstore,stratum,dapps,secretstore-http]-interface=all --*-hosts=all    This option
-        is UNSAFE and should be used with great care!
+        following: --[ws,jsonrpc,secretstore,stratum,secretstore-http]-interface=all --*-hosts=all    This option is
+        UNSAFE and should be used with great care!
 
     -c, --config=[CONFIG]
         Specify a configuration. CONFIG may be either a configuration file or a preset: dev, insecure, dev-insecure,
         mining, or non-standard-ports. (default: $BASE/config.toml)
 
     --ports-shift=[SHIFT]
-        Add SHIFT to all port numbers Parity is listening on. Includes network port and all servers (HTTP JSON-RPC,
-        WebSockets JSON-RPC, SecretStore). (default: 0)
+        Add SHIFT to all port numbers OpenEthereum is listening on. Includes network port and all servers (HTTP JSON
+        -RPC, WebSockets JSON-RPC, SecretStore). (default: 0)
 
 Account Options:
     --fast-unlock
@@ -119,38 +84,9 @@ Account Options:
     --unlock=[ACCOUNTS]
         Unlock ACCOUNTS for the duration of the execution. ACCOUNTS is a comma-delimited list of addresses.
 
-    --enable-signing-queue=[BOOLEAN]
-        Enables the signing queue for external transaction signing either via CLI or personal_unlockAccount, turned off
-        by default. (default: false)
-
     --password=[FILE]...
         Provide a file containing a password for unlocking an account. Leading and trailing whitespace is trimmed.
         (default: [])
-
-Private Transactions Options:
-    --private-tx-enabled
-        Enable private transactions.
-
-    --private-state-offchain
-        Store private state offchain (in the local DB).
-
-    --private-signer=[ACCOUNT]
-        Specify the account for signing public transaction created upon verified private transaction.
-
-    --private-validators=[ACCOUNTS]
-        Specify the accounts for validating private transactions. ACCOUNTS is a comma-delimited list of addresses.
-
-    --private-account=[ACCOUNT]
-        Specify the account for signing requests to secret store.
-
-    --private-sstore-url=[URL]
-        Specify secret store URL used for encrypting private transactions.
-
-    --private-sstore-threshold=[NUM]
-        Specify secret store threshold used for encrypting private transactions.
-
-    --private-passwords=[FILE]...
-        Provide a file containing passwords for unlocking accounts (signer, private account, validators).
 
 UI Options:
     --ui-path=[PATH]
@@ -169,9 +105,6 @@ Networking Options:
     --no-ancient-blocks
         Disable downloading old blocks after snapshot restoration or warp sync. Not recommended.
 
-    --no-serve-light
-        Disable serving of light peers.
-
     --warp-barrier=[NUM]
         When warp enabled never attempt regular sync before warping to block NUM.
 
@@ -179,8 +112,8 @@ Networking Options:
         Override the port on which the node should listen. (default: 30303)
 
     --interface=[IP]
-        Network interfaces. Valid values are 'all', 'local' or the ip of the interface you want parity to listen to.
-        (default: all)
+        Network interfaces. Valid values are 'all', 'local' or the ip of the interface you want OpenEthereum to listen
+        to. (default: all)
 
     --min-peers=[NUM]
         Try to maintain at least NUM peers.
@@ -240,22 +173,23 @@ API and Console Options – HTTP JSON-RPC:
     --jsonrpc-apis=[APIS]
         Specify the APIs available through the HTTP JSON-RPC interface using a comma-delimited list of API names.
         Possible names are: all, safe, debug, web3, net, eth, pubsub, personal, signer, parity, parity_pubsub,
-        parity_accounts, parity_set, traces, rpc, secretstore. You can also disable a specific API by putting '-' in the
+        parity_accounts, parity_set, traces, secretstore. You can also disable a specific API by putting '-' in the
         front, example: all,-personal. 'safe' enables the following APIs: web3, net, eth, pubsub, parity, parity_pubsub,
-        traces, rpc (default: web3,eth,pubsub,net,parity,private,parity_pubsub,traces,rpc,parity_transactions_pool)
+        traces (default: web3,eth,pubsub,net,parity,parity_pubsub,traces)
 
     --jsonrpc-hosts=[HOSTS]
         List of allowed Host header values. This option will validate the Host header sent by the browser, it is
         additional security against some attack vectors. Special options: "all", "none",. (default: none)
 
-    --jsonrpc-threads=[NUM]
-        DEPRECATED, DOES NOTHING
-
-    --jsonrpc-server-threads=[NUM]
-        Enables multiple threads handling incoming connections for HTTP JSON-RPC server. (default: 4)
+    --jsonrpc-threads=[THREADS]
+        Turn on additional processing threads for JSON-RPC servers (all transports). Setting this to a non-zero value
+        allows parallel execution of cpu-heavy queries. (default: 4)
 
     --jsonrpc-cors=[URL]
         Specify CORS header for HTTP JSON-RPC API responses. Special options: "all", "none". (default: none)
+
+    --jsonrpc-server-threads=[NUM]
+        Enables multiple threads handling incoming connections for HTTP JSON-RPC server.
 
     --jsonrpc-max-payload=[MB]
         Specify maximum size for HTTP JSON-RPC requests in megabytes.
@@ -278,13 +212,13 @@ API and Console Options – WebSockets:
     --ws-apis=[APIS]
         Specify the JSON-RPC APIs available through the WebSockets interface using a comma-delimited list of API names.
         Possible names are: all, safe, web3, net, eth, pubsub, personal, signer, parity, parity_pubsub, parity_accounts,
-        parity_set, traces, rpc, secretstore. You can also disable a specific API by putting '-' in the front, example:
-        all,-personal. 'safe' enables the following APIs: web3, net, eth, pubsub, parity, parity_pubsub, traces, rpc
-        (default: web3,eth,pubsub,net,parity,parity_pubsub,private,traces,rpc,parity_transactions_pool)
+        parity_set, traces, secretstore. You can also disable a specific API by putting '-' in the front, example:
+        all,-personal. 'safe' enables the following APIs: web3, net, eth, pubsub, parity, parity_pubsub, traces
+        (default: web3,eth,pubsub,net,parity,parity_pubsub,traces)
 
     --ws-origins=[URL]
-        Specify Origin header values allowed to connect. Special options: "all", "none". (default: parity://*,chrome-
-        extension://*,moz-extension://*)
+        Specify Origin header values allowed to connect. Special options: "all", "none". (default: parity://*,chrome
+        -extension://*,moz-extension://*)
 
     --ws-hosts=[HOSTS]
         List of allowed Host header values. This option will validate the Host header sent by the browser, it is
@@ -293,6 +227,17 @@ API and Console Options – WebSockets:
     --ws-max-connections=[CONN]
         Maximum number of allowed concurrent WebSockets JSON-RPC connections. (default: 100)
 
+Metrics:
+    --metrics
+        Enable prometheus metrics (only full client).
+
+    --metrics-port=[PORT]
+        Specify the port portion of the metrics server. (default: 3000)
+
+    --metrics-interface=[IP]
+        Specify the hostname portion of the metrics server, IP should be an interface's IP address, or all (all
+        interfaces) or local. (default: local)
+
 API and Console Options – IPC:
     --no-ipc
         Disable JSON-RPC over IPC service.
@@ -300,31 +245,12 @@ API and Console Options – IPC:
     --ipc-path=[PATH]
         Specify custom path for JSON-RPC over IPC service. (default: $BASE/jsonrpc.ipc)
 
-    --ipc-chmod=[NUM]
-        Specify octal value for ipc socket permissions (unix/bsd only) (default: 660)
-
     --ipc-apis=[APIS]
         Specify custom API set available via JSON-RPC over IPC using a comma-delimited list of API names. Possible names
         are: all, safe, web3, net, eth, pubsub, personal, signer, parity, parity_pubsub, parity_accounts, parity_set,
-        traces, rpc, secretstore. You can also disable a specific API by putting '-' in the front, example:
-        all,-personal. 'safe' enables the following APIs: web3, net, eth, pubsub, parity, parity_pubsub, traces, rpc
-        (default: web3,eth,pubsub,net,parity,parity_pubsub,parity_accounts,private,traces,rpc,parity_transactions_pool)
-
-Light Client Options:
-    --on-demand-time-window=[S]
-        Specify the maximum time to wait for a successful response
-
-    --on-demand-start-backoff=[S]
-        Specify light client initial backoff time for a request
-
-    --on-demand-end-backoff=[S]
-        Specify light client maximum backoff time for a request
-
-    --on-demand-max-backoff-rounds=[TIMES]
-        Specify light client maximum number of backoff iterations for a request
-
-    --on-demand-consecutive-failures=[TIMES]
-        Specify light client the number of failures for a request until it gets exponentially backed off
+        traces, secretstore. You can also disable a specific API by putting '-' in the front, example: all,-personal.
+        'safe' enables the following APIs: web3, net, eth, pubsub, parity, parity_pubsub, traces (default:
+        web3,eth,pubsub,net,parity,parity_pubsub,parity_accounts,traces)
 
 Secret Store Options:
     --no-secretstore
@@ -336,9 +262,6 @@ Secret Store Options:
     --no-secretstore-auto-migrate
         Do not run servers set change session automatically when servers set changes. This option has no effect when
         servers set is read from configuration file.
-
-    --secretstore-http-cors=[URL]
-        Specify CORS header for Secret Store HTTP API responses. Special options: "all", "none". (default: none)
 
     --secretstore-acl-contract=[SOURCE]
         Secret Store permissioning contract address source: none, registry (contract address is read from
@@ -563,11 +486,11 @@ Footprint Options:
         synced or default to fast if none synced. (default: auto)
 
     --pruning-history=[NUM]
-        Set a minimum number of recent states to keep in memory when pruning is active. (default: 128)
+        Set a minimum number of recent states to keep in memory when pruning is active. (default: 64)
 
     --pruning-memory=[MB]
         The ideal amount of memory in megabytes to use to store recent states. As many states as possible will be kept
-        within this limit, and at least --pruning-history states will always be kept. (default: 64)
+        within this limit, and at least --pruning-history states will always be kept. (default: 32)
 
     --cache-size-db=[MB]
         Override database cache size. (default: 128)
@@ -600,17 +523,8 @@ Import/export Options:
         Skip block seal check.
 
 Snapshot Options:
-    --no-periodic-snapshot
-        Disable automated snapshots which usually occur once every 5000 blocks.
+    --enable-snapshotting
+        Enable automated snapshots which usually occur once every 5000 blocks.
 
     --snapshot-threads=[NUM]
         Enables multiple threads for snapshots creation.
-
-Whisper Options:
-    --whisper
-        Does nothing. Whisper has been moved to https://github.com/paritytech/whisper
-
-    --whisper-pool-size=[MB]
-        Does nothing. Whisper has been moved to https://github.com/paritytech/whisper
-
-

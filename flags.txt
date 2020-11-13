@@ -7,7 +7,7 @@ USAGE:
    geth [options] command [command options] [arguments...]
    
 VERSION:
-   1.9.20-stable-979fc968
+   1.9.24-stable-cc05b050
    
 COMMANDS:
    account                            Manage accounts
@@ -36,15 +36,15 @@ COMMANDS:
    
 ETHEREUM OPTIONS:
   --config value                      TOML configuration file
-  --datadir value                     Data directory for the databases and keystore (default: "/Users/lishude/Library/Ethereum")
+  --datadir value                     Data directory for the databases and keystore (default: "/root/.ethereum")
   --datadir.ancient value             Data directory for ancient chain segments (default = inside chaindata)
   --keystore value                    Directory for the keystore (default = inside the datadir)
   --nousb                             Disables monitoring for and managing USB hardware wallets
-  --pcscdpath value                   Path to the smartcard daemon (pcscd) socket file
-  --networkid value                   Network identifier (integer, 1=Frontier, 3=Ropsten, 4=Rinkeby, 5=Görli) (default: 1)
+  --pcscdpath value                   Path to the smartcard daemon (pcscd) socket file (default: "/run/pcscd/pcscd.comm")
+  --networkid value                   Explicitly set network id (integer)(For testnets: use --ropsten, --rinkeby, --goerli instead) (default: 1)
   --goerli                            Görli network: pre-configured proof-of-authority test network
   --rinkeby                           Rinkeby network: pre-configured proof-of-authority test network
-  --yolov1                            YOLOv1 network: pre-configured proof-of-authority shortlived test network.
+  --yolov2                            YOLOv2 network: pre-configured proof-of-authority shortlived test network.
   --ropsten                           Ropsten network: pre-configured proof-of-work test network
   --syncmode value                    Blockchain sync mode ("fast", "full", or "light") (default: fast)
   --exitwhensynced                    Exits after block synchronisation completes
@@ -74,7 +74,7 @@ ETHASH OPTIONS:
   --ethash.cachesinmem value          Number of recent ethash caches to keep in memory (16MB each) (default: 2)
   --ethash.cachesondisk value         Number of recent ethash caches to keep on disk (16MB each) (default: 3)
   --ethash.cacheslockmmap             Lock memory maps of recent ethash caches
-  --ethash.dagdir value               Directory to store the ethash mining DAGs (default: "/Users/lishude/Library/Ethash")
+  --ethash.dagdir value               Directory to store the ethash mining DAGs (default: "/root/.ethash")
   --ethash.dagsinmem value            Number of recent ethash mining DAGs to keep in memory (1+GB each) (default: 1)
   --ethash.dagsondisk value           Number of recent ethash mining DAGs to keep on disk (1+GB each) (default: 2)
   --ethash.dagslockmmap               Lock memory maps for recent ethash mining DAGs
@@ -161,6 +161,7 @@ MINER OPTIONS:
 GAS PRICE ORACLE OPTIONS:
   --gpo.blocks value                  Number of recent blocks to check for gas prices (default: 20)
   --gpo.percentile value              Suggested gas price is the given percentile of a set of recent transaction gas prices (default: 60)
+  --gpo.maxprice value                Maximum gas price will be recommended by gpo (default: 500000000000)
   
 VIRTUAL MACHINE OPTIONS:
   --vmdebug                           Record information useful for VM and contract debugging
@@ -194,7 +195,7 @@ METRICS AND STATS OPTIONS:
   --metrics.influxdb.password value   Password to authorize access to the database (default: "test")
   --metrics.influxdb.tags value       Comma-separated InfluxDB tags (key/values) attached to all measurements (default: "host=localhost")
   
-WHISPER (EXPERIMENTAL) OPTIONS:
+WHISPER (deprecated) OPTIONS:
   --shh                               Enable Whisper
   --shh.maxmessagesize value          Max message size accepted (default: 1048576)
   --shh.pow value                     Minimum POW accepted (default: 0.2)
