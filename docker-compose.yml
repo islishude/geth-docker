@@ -2,7 +2,7 @@ version: "3"
 
 services:
   geth:
-    image: ethereum/go-client:v1.9.24
+    image: ethereum/client-go:v1.9.24
     restart: unless-stopped
     ports:
       - "30303:30303"
@@ -19,7 +19,7 @@ services:
       - --http
       - --http.api
       - "eth,net,web3"
-      - --http.adddr=0.0.0.0
+      - --http.addr=0.0.0.0
       - --http.vhosts=*
       - --http.corsdomain=*
       - --ws
