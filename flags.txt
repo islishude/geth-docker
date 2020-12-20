@@ -7,7 +7,7 @@ USAGE:
    geth [options] command [command options] [arguments...]
    
 VERSION:
-   1.9.24-stable-cc05b050
+   1.9.25-stable-e7872729
    
 COMMANDS:
    account                            Manage accounts
@@ -28,9 +28,9 @@ COMMANDS:
    makecache                          Generate ethash verification cache (for testing)
    makedag                            Generate ethash mining DAG (for testing)
    removedb                           Remove blockchain and state databases
-   retesteth                          Launches geth in retesteth mode
    show-deprecated-flags              Show flags that have been deprecated
    version                            Print version numbers
+   version-check                      Checks (online) whether the current version suffers from any known security vulnerabilities
    wallet                             Manage Ethereum presale wallets
    help, h                            Shows a list of commands or help for one command
    
@@ -101,6 +101,7 @@ PERFORMANCE TUNING OPTIONS:
   --cache.gc value                    Percentage of cache memory allowance to use for trie pruning (default = 25% full mode, 0% archive mode) (default: 25)
   --cache.snapshot value              Percentage of cache memory allowance to use for snapshot caching (default = 10% full mode, 20% archive mode) (default: 10)
   --cache.noprefetch                  Disable heuristic state prefetch during block import (less CPU and disk IO, more time waiting for data)
+  --cache.preimages                   Enable recording the SHA3/keccak preimages of trie keys (default: true)
   
 ACCOUNT OPTIONS:
   --unlock value                      Comma separated list of accounts to unlock
