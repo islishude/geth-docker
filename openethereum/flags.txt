@@ -7,22 +7,22 @@ OpenEthereum Client.
 
 openethereum [options]
 openethereum [options] daemon <PID-FILE>
-openethereum [options] account new
-openethereum [options] account list
+openethereum [options] account new 
+openethereum [options] account list 
 openethereum [options] account import <PATH>...
 openethereum [options] wallet import <PATH>
 openethereum [options] import --format=[FORMAT] [FILE]
 openethereum [options] export blocks --format=[FORMAT] --from=[BLOCK] --to=[BLOCK] [FILE]
 openethereum [options] export state [--no-storage] [--no-code] --min-balance=[WEI] --max-balance=[WEI] --at=[BLOCK]
     --format=[FORMAT] [FILE]
-openethereum [options] signer new-token
-openethereum [options] signer list
+openethereum [options] signer new-token 
+openethereum [options] signer list 
 openethereum [options] signer sign [ID]
 openethereum [options] signer reject <ID>
 openethereum [options] snapshot --at=[BLOCK] <FILE>
 openethereum [options] restore [FILE]
 openethereum [options] tools hash <FILE>
-openethereum [options] db kill
+openethereum [options] db kill 
 openethereum [options] db reset <NUM>
 
 Operating Options:
@@ -39,8 +39,8 @@ Operating Options:
 
     --chain=[CHAIN]
         Specify the blockchain type. CHAIN may be either a JSON chain specification file or ethereum, poacore, xdai,
-        volta, ewc, musicoin, ellaism, mix, callisto, morden, ropsten, kovan, rinkeby, goerli, poasokol, testnet, or
-        dev. (default: foundation)
+        volta, ewc, musicoin, ellaism, mix, callisto, morden, ropsten, kovan, rinkeby, goerli, poasokol, testnet, yolo3
+        or dev. (default: foundation)
 
     --keys-path=[PATH]
         Specify the path for JSON key files to be found (default: $BASE/keys)
@@ -173,9 +173,9 @@ API and Console Options – HTTP JSON-RPC:
     --jsonrpc-apis=[APIS]
         Specify the APIs available through the HTTP JSON-RPC interface using a comma-delimited list of API names.
         Possible names are: all, safe, debug, web3, net, eth, pubsub, personal, signer, parity, parity_pubsub,
-        parity_accounts, parity_set, traces, secretstore. You can also disable a specific API by putting '-' in the
+        parity_accounts, parity_set, traces, rpc, secretstore. You can also disable a specific API by putting '-' in the
         front, example: all,-personal. 'safe' enables the following APIs: web3, net, eth, pubsub, parity, parity_pubsub,
-        traces (default: web3,eth,pubsub,net,parity,parity_pubsub,traces)
+        traces, rpc (default: web3,eth,pubsub,net,parity,parity_pubsub,traces,rpc)
 
     --jsonrpc-hosts=[HOSTS]
         List of allowed Host header values. This option will validate the Host header sent by the browser, it is
@@ -212,9 +212,9 @@ API and Console Options – WebSockets:
     --ws-apis=[APIS]
         Specify the JSON-RPC APIs available through the WebSockets interface using a comma-delimited list of API names.
         Possible names are: all, safe, web3, net, eth, pubsub, personal, signer, parity, parity_pubsub, parity_accounts,
-        parity_set, traces, secretstore. You can also disable a specific API by putting '-' in the front, example:
-        all,-personal. 'safe' enables the following APIs: web3, net, eth, pubsub, parity, parity_pubsub, traces
-        (default: web3,eth,pubsub,net,parity,parity_pubsub,traces)
+        parity_set, traces, rpc, secretstore. You can also disable a specific API by putting '-' in the front, example:
+        all,-personal. 'safe' enables the following APIs: web3, net, eth, pubsub, parity, parity_pubsub, traces, rpc
+        (default: web3,eth,pubsub,net,parity,parity_pubsub,traces,rpc)
 
     --ws-origins=[URL]
         Specify Origin header values allowed to connect. Special options: "all", "none". (default: parity://*,chrome
@@ -227,9 +227,15 @@ API and Console Options – WebSockets:
     --ws-max-connections=[CONN]
         Maximum number of allowed concurrent WebSockets JSON-RPC connections. (default: 100)
 
+    --ws-max-payload=[MB]
+        Specify maximum size for WS JSON-RPC requests in megabytes. (default: 5)
+
 Metrics:
     --metrics
         Enable prometheus metrics (only full client).
+
+    --metrics-prefix=[prefix]
+        Prepend the specified prefix to the exported metrics names. (default: )
 
     --metrics-port=[PORT]
         Specify the port portion of the metrics server. (default: 3000)
@@ -248,9 +254,9 @@ API and Console Options – IPC:
     --ipc-apis=[APIS]
         Specify custom API set available via JSON-RPC over IPC using a comma-delimited list of API names. Possible names
         are: all, safe, web3, net, eth, pubsub, personal, signer, parity, parity_pubsub, parity_accounts, parity_set,
-        traces, secretstore. You can also disable a specific API by putting '-' in the front, example: all,-personal.
-        'safe' enables the following APIs: web3, net, eth, pubsub, parity, parity_pubsub, traces (default:
-        web3,eth,pubsub,net,parity,parity_pubsub,parity_accounts,traces)
+        traces, rpc, secretstore. You can also disable a specific API by putting '-' in the front, example:
+        all,-personal. 'safe' enables the following APIs: web3, net, eth, pubsub, parity, parity_pubsub, traces, rpc
+        (default: web3,eth,pubsub,net,parity,parity_pubsub,parity_accounts,traces,rpc)
 
 Secret Store Options:
     --no-secretstore
@@ -448,7 +454,7 @@ Sealing/Mining Options:
         Secret for authorizing Stratum server for peers.
 
     --max-round-blocks-to-import=[S]
-        Maximal number of blocks to import for each import round. (default: 12)
+        Maximal number of blocks to import for each import round. (default: 1)
 
 Internal Options:
     --can-restart
@@ -528,3 +534,5 @@ Snapshot Options:
 
     --snapshot-threads=[NUM]
         Enables multiple threads for snapshots creation.
+
+

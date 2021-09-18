@@ -1,12 +1,12 @@
-FROM golang:1.15-alpine as BUILDER
-ARG VERSION=v1.9.25
+FROM golang:1.17.1-alpine as BUILDER
+ARG VERSION=v1.10.8
 ENV GO111MODULE=on
 RUN apk add --no-cache make gcc musl-dev linux-headers git ca-certificates
 WORKDIR /geth
 RUN git clone --quiet --branch ${VERSION} --depth 1 https://github.com/ethereum/go-ethereum .
 RUN make geth
 
-FROM alpine:3.12
+FROM alpine:3.14.1
 RUN addgroup -g 1000 geth && adduser -u 1000 -G geth -s /bin/sh -D geth
 COPY --from=BUILDER /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=BUILDER /geth/build/bin/geth /usr/local/bin/
