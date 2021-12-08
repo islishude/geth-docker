@@ -7,7 +7,7 @@ USAGE:
    geth [options] [command] [command options] [arguments...]
    
 VERSION:
-   1.10.8-stable-26675454
+   1.10.13-stable-7a0c19f8
    
 COMMANDS:
    account                            Manage accounts
@@ -47,6 +47,7 @@ ETHEREUM OPTIONS:
   --goerli                            Görli network: pre-configured proof-of-authority test network
   --rinkeby                           Rinkeby network: pre-configured proof-of-authority test network
   --ropsten                           Ropsten network: pre-configured proof-of-work test network
+  --sepolia                           Sepolia network: pre-configured proof-of-work test network
   --syncmode value                    Blockchain sync mode ("fast", "full", "snap" or "light") (default: snap)
   --exitwhensynced                    Exits after block synchronisation completes
   --gcmode value                      Blockchain garbage collection mode ("full", "archive") (default: "full")
@@ -70,6 +71,7 @@ LIGHT CLIENT OPTIONS:
 DEVELOPER CHAIN OPTIONS:
   --dev                               Ephemeral proof-of-authority network with a pre-funded developer account, mining enabled
   --dev.period value                  Block period to use in developer mode (0 = mine only if transaction pending) (default: 0)
+  --dev.gaslimit value                Initial block gas limit (default: 11500000)
   
 ETHASH OPTIONS:
   --ethash.cachedir value             Directory to store the ethash verification caches (default = inside the datadir)
@@ -131,6 +133,7 @@ API AND CONSOLE OPTIONS:
   --graphql.corsdomain value          Comma separated list of domains from which to accept cross origin requests (browser enforced)
   --graphql.vhosts value              Comma separated list of virtual hostnames from which to accept requests (server enforced). Accepts '*' wildcard. (default: "localhost")
   --rpc.gascap value                  Sets a cap on gas that can be used in eth_call/estimateGas (0=infinite) (default: 50000000)
+  --rpc.evmtimeout value              Sets a timeout used for eth_call (0=infinite) (default: 5s)
   --rpc.txfeecap value                Sets a cap on transaction fee (in ether) that can be sent via the RPC APIs (0 = no cap) (default: 1)
   --rpc.allow-unprotected-txs         Allow for unprotected (non EIP155 signed) transactions to be submitted via RPC
   --jspath loadScript                 JavaScript root path for loadScript (default: ".")
@@ -165,7 +168,7 @@ MINER OPTIONS:
 GAS PRICE ORACLE OPTIONS:
   --gpo.blocks value                  Number of recent blocks to check for gas prices (default: 20)
   --gpo.percentile value              Suggested gas price is the given percentile of a set of recent transaction gas prices (default: 60)
-  --gpo.maxprice value                Maximum gas price will be recommended by gpo (default: 500000000000)
+  --gpo.maxprice value                Maximum transaction priority fee (or gasprice before London fork) to be recommended by gpo (default: 500000000000)
   --gpo.ignoreprice value             Gas price below which gpo will ignore transactions (default: 2)
   
 VIRTUAL MACHINE OPTIONS:
@@ -205,20 +208,13 @@ METRICS AND STATS OPTIONS:
   
 ALIASED (deprecated) OPTIONS:
   --nousb                             Disables monitoring for and managing USB hardware wallets (deprecated)
-  --rpc                               Enable the HTTP-RPC server (deprecated and will be removed June 2021, use --http)
-  --rpcaddr value                     HTTP-RPC server listening interface (deprecated and will be removed June 2021, use --http.addr) (default: "localhost")
-  --rpcport value                     HTTP-RPC server listening port (deprecated and will be removed June 2021, use --http.port) (default: 8545)
-  --rpccorsdomain value               Comma separated list of domains from which to accept cross origin requests (browser enforced) (deprecated and will be removed June 2021, use --http.corsdomain)
-  --rpcvhosts value                   Comma separated list of virtual hostnames from which to accept requests (server enforced). Accepts '*' wildcard. (deprecated and will be removed June 2021, use --http.vhosts) (default: "localhost")
-  --rpcapi value                      API's offered over the HTTP-RPC interface (deprecated and will be removed June 2021, use --http.api)
-  --miner.gastarget value             Target gas floor for mined blocks (deprecated) (default: 0)
   
 MISC OPTIONS:
   --snapshot                          Enables snapshot-database mode (default = enable)
   --bloomfilter.size value            Megabytes of memory allocated to bloom-filter for pruning (default: 2048)
   --help, -h                          show help
   --catalyst                          Catalyst mode (eth2 integration testing)
-  --override.london value             Manually specify London fork-block, overriding the bundled setting (default: 0)
+  --override.arrowglacier value       Manually specify Arrow Glacier fork-block, overriding the bundled setting (default: 0)
   
 
 COPYRIGHT:

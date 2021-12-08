@@ -25,7 +25,7 @@ spec:
       terminationGracePeriodSeconds: 300
       containers:
         - name: geth
-          image: docker.io/ethereum/client-go:v1.10.8
+          image: docker.io/ethereum/client-go:v1.10.13
           ports:
             - containerPort: 8545
             - containerPort: 8546
