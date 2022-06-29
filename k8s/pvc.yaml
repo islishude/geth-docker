@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chaindata-gethnode
+spec:
+  resources:
+    requests:
+      storage: 750gi
+  volumeMode: Filesystem
+  storageClassName: ebs-gp3
+  accessModes:
+    - ReadWriteOnce

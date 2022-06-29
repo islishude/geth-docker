@@ -2,7 +2,9 @@ version: "3"
 
 services:
   geth:
-    image: ethereum/client-go:v1.10.13
+    image: ethereum/client-go
+    pull_policy: always
+    container_name: gethnode
     restart: unless-stopped
     ports:
       - "30303:30303"
@@ -10,7 +12,7 @@ services:
       - "8545:8545"
       - "8546:8546"
     volumes:
-      - ./chaindata:/chaindata
+      - ${GETH_DATADIR:-/data/geth}:/root/.ethereum
     stop_signal: SIGINT
     stop_grace_period: 2m
     command:
@@ -28,8 +30,6 @@ services:
       - --graphql
       - --graphql.corsdomain=*
       - --graphql.vhosts=*
-      - --datadir
-      - "/chaindata"
       # Minimum number of executable transaction slots guaranteed per account (default: 16)
       # - --txpool.accountslots=16
       # Maximum number of non-executable transaction slots for all accounts (default: 1024)
