@@ -11,7 +11,8 @@ $ docker-compose up -d
 
 Get logs
 
-```
+```console
+$ docker-compose logs -f
 gethnode  | INFO [06-29|23:46:05.878] Starting Geth on Ethereum mainnet... 
 gethnode  | INFO [06-29|23:46:05.878] Bumping default cache on mainnet         provided=1024 updated=4096
 gethnode  | INFO [06-29|23:46:05.880] Maximum peer count                       ETH=50 LES=0 total=50

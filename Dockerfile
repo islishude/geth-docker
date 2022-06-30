@@ -1,7 +1,6 @@
 # syntax=docker/dockerfile:experimental
 FROM --platform=${BUILDPLATFORM} golang:1.18.3-alpine as BUILDER
 ARG VERSION=v1.10.20
-ENV GO111MODULE=on
 RUN apk add --no-cache make gcc musl-dev linux-headers git ca-certificates
 WORKDIR /geth
 RUN git clone --quiet --branch ${VERSION} --depth 1 https://github.com/ethereum/go-ethereum .
