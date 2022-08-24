@@ -1,29 +1,30 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: gethnode
+  name: geth
   namespace: chainrpc
 spec:
   selector:
     matchLabels:
-      app: gethnode
+      app: geth
   replicas: 1
-  serviceName: gethnode
+  serviceName: geth
   updateStrategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: gethnode
+        app: geth
     spec:
       terminationGracePeriodSeconds: 300
       containers:
         - name: geth
-          image: docker.io/ethereum/client-go
+          image: ethereum/client-go
           imagePullPolicy: Always
           ports:
             - containerPort: 8545
             - containerPort: 8546
+            - containerPort: 8551
             - { containerPort: 30303, protocol: TCP }
             - { containerPort: 30303, protocol: UDP }
           args:
@@ -40,6 +41,11 @@ spec:
               "--graphql",
               "--graphql.corsdomain=*",
               "--graphql.vhosts=*",
+              "--authrpc.addr=0.0.0.0",
+              "--authrpc.vhosts=*",
+              "--authrpc.jwtsecret=/jwt/jwt.hex",
+              "--authrpc.port=8551",
+              "--txlookuplimit=0",
             ]
           resources:
             requests:
@@ -62,4 +68,7 @@ spec:
       volumes:
         - name: chaindata
           persistentVolumeClaim:
-            claimName: chaindata-gethnode
+            claimName: chaindata-geth
+        - configMap:
+            name: geth-jwt
+          name: jwt

@@ -1,15 +1,12 @@
 # syntax=docker/dockerfile:experimental
-FROM --platform=${BUILDPLATFORM} golang:1.18.3-alpine as BUILDER
-ARG VERSION=v1.10.20
-RUN apk add --no-cache make gcc musl-dev linux-headers git ca-certificates
+FROM --platform=${BUILDPLATFORM} golang:1.19 as BUILDER
+RUN apt update && apt install -y build-essential git
 WORKDIR /geth
+ARG VERSION=v1.10.23
 RUN git clone --quiet --branch ${VERSION} --depth 1 https://github.com/ethereum/go-ethereum .
-RUN make geth
+RUN go run build/ci.go install -static ./cmd/geth
 
-FROM --platform=${BUILDPLATFORM} alpine:3.16.0
-RUN addgroup -g 1000 geth && adduser -u 1000 -G geth -s /bin/sh -D geth
-COPY --from=BUILDER /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+FROM --platform=${BUILDPLATFORM} gcr.io/distroless/static
 COPY --from=BUILDER /geth/build/bin/geth /usr/local/bin/
-EXPOSE 8545 8546 30303 30303/udp
-STOPSIGNAL SIGINT
+EXPOSE 8545 8546 8551 30303 30303/udp
 ENTRYPOINT ["geth"]

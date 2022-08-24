@@ -5,7 +5,7 @@ on:
     paths-ignore:
       - ".github"
     branches:
-      - "master"
+      - "*"
     tags:
       - "v*.*.*"
 
@@ -28,7 +28,7 @@ jobs:
         if: ${{ github.ref_type == 'branch' }}
         uses: docker/build-push-action@v2
         with:
-          push: true
+          push: ${{ github.ref_name == 'master' }}
           platforms: linux/amd64,linux/arm64
           tags: islishude/geth:latest
           cache-from: type=gha
@@ -39,4 +39,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: islishude/web3-cli:${{ github.ref_name }}
+          platforms: linux/amd64,linux/arm64
+          tags: islishude/geth:${{ github.ref_name }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
