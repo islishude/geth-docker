@@ -2,8 +2,8 @@ name: ci
 
 on:
   push:
-    paths-ignore:
-      - ".github"
+    paths:
+      - "Dockerfile"
     branches:
       - "*"
     tags:
