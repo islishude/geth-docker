@@ -1,53 +1,73 @@
-version: "3"
+version: "3.8"
 
 services:
   geth:
     image: ethereum/client-go
     pull_policy: always
-    container_name: gethnode
+    container_name: geth
     restart: unless-stopped
     ports:
-      - "30303:30303"
-      - "30303:30303/udp"
-      - "8545:8545"
-      - "8546:8546"
+      - 30303:30303
+      - 30303:30303/udp
+      - 8545:8545
+      - 8546:8546
+      - 8551:8551
     volumes:
       - ${GETH_DATADIR:-/data/geth}:/root/.ethereum
     stop_signal: SIGINT
     stop_grace_period: 2m
+    healthcheck:
+      test: [ "CMD-SHELL", "geth attach --exec eth.blockNumber" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     command:
       - --http
-      - --http.api
-      - "eth,net,web3"
+      - --http.api=eth,net,web3
       - --http.addr=0.0.0.0
       - --http.vhosts=*
       - --http.corsdomain=*
       - --ws
       - --ws.origins=*
       - --ws.addr=0.0.0.0
-      - --ws.api
-      - "eth,net,web3"
+      - --ws.api=eth,net,web3
       - --graphql
       - --graphql.corsdomain=*
       - --graphql.vhosts=*
-      # Minimum number of executable transaction slots guaranteed per account (default: 16)
-      # - --txpool.accountslots=16
-      # Maximum number of non-executable transaction slots for all accounts (default: 1024)
-      # --txpool.globalqueue=1024
-      # Maximum number of executable transaction slots for all accounts (default: 4096)
-      # - --txpool.globalslots=10000
-      # Maximum amount of time non-executable transaction are queued (default: 3h0m0s)
-      # - --txpool.lifetime=3h0m0s
-      # Megabytes of memory allocated to internal caching (default: 1024)
-      # - --cache=4096
-      # Maximum number of network peers (network disabled if set to 0) (default: 25)
-      # - --maxpeers=100
-      # Blockchain sync mode ("fast", "full", or "light")
-      # - --syncmode=fast
-      # Blockchain garbage collection mode ("full", "archive") (default: "full")
-      # - --gcmode=full
+      - --authrpc.addr=0.0.0.0
+      - --authrpc.vhosts=*
+      - --authrpc.jwtsecret=/root/.ethereum/jwt.hex
+      - --authrpc.port=8551
+      - --txlookuplimit=0
     logging:
-      driver: "json-file"
+      driver: json-file
       options:
-        max-size: "2m"
-        max-file: "10"
+        max-size: 2m
+        max-file: 10
+  prysm:
+    image: gcr.io/prysmaticlabs/prysm/beacon-chain
+    pull_policy: always
+    container_name: beacon
+    restart: unless-stopped
+    stop_grace_period: 2m
+    volumes:
+      - ${PRYSM_DATADIR:-/data/prysm}:/data
+      - ${GETH_DATADIR:-/data/geth}:/geth
+    depends_on:
+      geth:
+        condition: service_healthy
+    command:
+      - --accept-terms-of-use
+      - --datadir=/data
+      - --disable-monitoring
+      - --rpc-host=0.0.0.0
+      - --http-web3provider=http://geth:8545
+      - --execution-endpoint=http://geth:8551
+      - --jwt-secret=/geth/jwt.hex
+      - --grpc-gateway-host=0.0.0.0
+      - --grpc-gateway-corsdomain=*
+    logging:
+      driver: json-file
+      options:
+        max-size: 2m
+        max-file: 10

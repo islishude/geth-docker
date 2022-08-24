@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gethnode
+  name: geth
   namespace: chainrpc
 spec:
   ports:
@@ -13,6 +13,10 @@ spec:
       targetPort: 8546
       port: 8546
       name: websoket
+    - protocol: TCP
+      targetPort: 8551
+      port: 8551
+      name: authrpc
   clusterIP: None
   selector:
-    app: gethnode
+    app: geth

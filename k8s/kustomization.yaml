@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: chainrpc
+resources:
+  - storageclass.yaml
+  - pvc.yaml
+  - service.yaml
+  - statefulset.yaml
+configMapGenerator:
+  - name: geth-jwt
+    files: ["jwt.hex"]
+    options:
+      disableNameSuffixHash: true
+images:
+  - name: ethereum/client-go
+    newTag: v1.10.23
+  - name: gcr.io/prysmaticlabs/prysm/beacon-chain
+    newTag: v3.0.0
