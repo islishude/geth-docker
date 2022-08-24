@@ -5,7 +5,8 @@ resources:
   - storageclass.yaml
   - pvc.yaml
   - service.yaml
-  - statefulset.yaml
+  - geth.yaml
+  - prysm.yaml
 configMapGenerator:
   - name: geth-jwt
     files: ["jwt.hex"]
