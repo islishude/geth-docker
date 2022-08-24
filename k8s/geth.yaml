@@ -31,7 +31,7 @@ spec:
             [
               "--http",
               "--http.addr=0.0.0.0",
-              "--http.api=eth,net,web3",
+              "--http.api=eth,net,web3,engine,admin",
               "--http.vhosts=*",
               "--http.corsdomain=*",
               "--ws",
