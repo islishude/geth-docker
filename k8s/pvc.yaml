@@ -5,7 +5,20 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 750Gi
+      storage: 850Gi
+  volumeMode: Filesystem
+  storageClassName: ebs-gp3
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chaindata-prysm
+spec:
+  resources:
+    requests:
+      storage: 150Gi
   volumeMode: Filesystem
   storageClassName: ebs-gp3
   accessModes:
