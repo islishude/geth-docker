@@ -56,16 +56,21 @@ services:
     depends_on:
       geth:
         condition: service_healthy
+    ports:
+      - 4000:4000
+      - 3500:3500
     command:
       - --accept-terms-of-use
       - --datadir=/data
       - --disable-monitoring
       - --rpc-host=0.0.0.0
-      - --http-web3provider=http://geth:8545
       - --execution-endpoint=http://geth:8551
       - --jwt-secret=/geth/jwt.hex
-      - --grpc-gateway-host=0.0.0.0
+      - --rpc-host=0.0.0.0
+      - --rpc-port=4000
       - --grpc-gateway-corsdomain=*
+      - --grpc-gateway-host=0.0.0.0
+      - --grpc-gateway-port=3500
     logging:
       driver: json-file
       options:

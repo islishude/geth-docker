@@ -20,7 +20,6 @@ spec:
       containers:
         - name: geth
           image: ethereum/client-go
-          imagePullPolicy: Always
           ports:
             - containerPort: 8545
             - containerPort: 8546

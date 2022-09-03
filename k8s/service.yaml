@@ -29,5 +29,9 @@ spec:
       targetPort: 4000
       port: 4000
       name: grpc
+    - protocol: TCP
+      targetPort: 3500
+      port: 3500
+      name: jsonrpc
   selector:
     app: prysm
