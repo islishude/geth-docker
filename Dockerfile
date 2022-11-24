@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:experimental
+# syntax=docker/dockerfile:1
 FROM --platform=${BUILDPLATFORM} golang:1.19.1 as BUILDER
 RUN apt update && apt install -y build-essential git
 WORKDIR /geth
@@ -9,5 +9,5 @@ RUN go run build/ci.go install -static ./cmd/geth
 FROM --platform=${BUILDPLATFORM} gcr.io/distroless/static
 COPY --from=BUILDER /geth/build/bin/geth /usr/local/bin/
 EXPOSE 8545 8546 8551 30303 30303/udp
-USER nonroot
+USER 65532
 ENTRYPOINT ["geth"]
