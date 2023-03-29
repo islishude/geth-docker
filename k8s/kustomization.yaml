@@ -13,6 +13,6 @@ configMapGenerator:
       disableNameSuffixHash: true
 images:
   - name: ethereum/client-go
-    newTag: v1.10.23
+    newTag: v1.11.5
   - name: gcr.io/prysmaticlabs/prysm/beacon-chain
-    newTag: v3.1.1
+    newTag: v4.0.1
