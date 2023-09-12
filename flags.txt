@@ -5,7 +5,7 @@ USAGE:
    geth [global options] command [command options] [arguments...]
 
 VERSION:
-   1.12.0-stable-e501b3b0
+   1.13.0-stable-7371b381
 
 COMMANDS:
    account                Manage accounts
@@ -32,11 +32,8 @@ COMMANDS:
    help, h                Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   
-    --log.rotate                   (default: false)
-          Enables log file rotation
-   
    ACCOUNT
+
    
     --allow-insecure-unlock        (default: false)
           Allow insecure account unlocking when account-related RPCs are exposed by http
@@ -50,7 +47,7 @@ GLOBAL OPTIONS:
     --password value              
           Password file to use for non-interactive password input
    
-    --pcscdpath value              (default: "/run/pcscd/pcscd.comm")
+    --pcscdpath value             
           Path to the smartcard daemon (pcscd) socket file
    
     --signer value                
@@ -61,17 +58,33 @@ GLOBAL OPTIONS:
    
     --usb                          (default: false)
           Enable monitoring and management of USB hardware wallets
-   
+
    ALIASED (deprecated)
+
+   
+    --cache.trie.journal value    
+          Disk journal directory for trie cache to survive node restarts
+   
+    --cache.trie.rejournal value   (default: 0s)
+          Time interval to regenerate the trie cache journal
    
     --nousb                        (default: false)
           Disables monitoring for and managing USB hardware wallets (deprecated)
    
+    --txlookuplimit value          (default: 2350000)
+          Number of recent blocks to maintain transactions index for (default = about one
+          year, 0 = entire chain) (deprecated, use history.transactions instead)
+   
+    --v5disc                       (default: false)
+          Enables the experimental RLPx V5 (Topic Discovery) mechanism (deprecated, use
+          --discv5 instead)
+   
     --whitelist value             
           Comma separated block number-to-hash mappings to enforce (<number>=<hash>)
           (deprecated in favor of --eth.requiredblocks)
-   
+
    API AND CONSOLE
+
    
     --authrpc.addr value           (default: "localhost")
           Listening address for authenticated APIs
@@ -144,6 +157,12 @@ GLOBAL OPTIONS:
     --rpc.allow-unprotected-txs    (default: false)
           Allow for unprotected (non EIP155 signed) transactions to be submitted via RPC
    
+    --rpc.batch-request-limit value (default: 1000)
+          Maximum number of requests in a batch
+   
+    --rpc.batch-response-max-size value (default: 25000000)
+          Maximum number of bytes returned from a batched call
+   
     --rpc.enabledeprecatedpersonal (default: false)
           Enables the (deprecated) personal namespace
    
@@ -174,8 +193,9 @@ GLOBAL OPTIONS:
    
     --ws.rpcprefix value          
           HTTP path prefix on which JSON-RPC is served. Use '/' to serve on all paths.
-   
+
    DEVELOPER CHAIN
+
    
     --dev                          (default: false)
           Ephemeral proof-of-authority network with a pre-funded developer account, mining
@@ -186,8 +206,9 @@ GLOBAL OPTIONS:
    
     --dev.period value             (default: 0)
           Block period to use in developer mode (0 = mine only if transaction pending)
-   
+
    ETHEREUM
+
    
     --bloomfilter.size value       (default: 2048)
           Megabytes of memory allocated to bloom-filter for pruning
@@ -195,7 +216,7 @@ GLOBAL OPTIONS:
     --config value                
           TOML configuration file
    
-    --datadir value                (default: /home/nonroot/.ethereum)
+    --datadir value                (default: /Users/lishude/Library/Ethereum)
           Data directory for the databases and keystore
    
     --datadir.ancient value       
@@ -215,39 +236,33 @@ GLOBAL OPTIONS:
     --exitwhensynced               (default: false)
           Exits after block synchronisation completes
    
-    --gcmode value                 (default: "full")
-          Blockchain garbage collection mode ("full", "archive")
-   
     --goerli                       (default: false)
           Görli network: pre-configured proof-of-authority test network
+   
+    --holesky                      (default: false)
+          Holesky network: pre-configured proof-of-stake test network
    
     --mainnet                      (default: false)
           Ethereum mainnet
    
     --networkid value              (default: 1)
-          Explicitly set network id (integer)(For testnets: use --rinkeby, --goerli,
-          --sepolia instead)
+          Explicitly set network id (integer)(For testnets: use --goerli, --sepolia,
+          --holesky instead)
    
     --override.cancun value        (default: 0)
           Manually specify the Cancun fork timestamp, overriding the bundled setting
    
-    --rinkeby                      (default: false)
-          Rinkeby network: pre-configured proof-of-authority test network
+    --override.verkle value        (default: 0)
+          Manually specify the Verkle fork timestamp, overriding the bundled setting
    
     --sepolia                      (default: false)
           Sepolia network: pre-configured proof-of-work test network
    
     --snapshot                     (default: true)
           Enables snapshot-database mode (default = enable)
-   
-    --syncmode value               (default: snap)
-          Blockchain sync mode ("snap", "full" or "light")
-   
-    --txlookuplimit value          (default: 2350000)
-          Number of recent blocks to maintain transactions index for (default = about one
-          year, 0 = entire chain)
-   
+
    GAS PRICE ORACLE
+
    
     --gpo.blocks value             (default: 20)
           Number of recent blocks to check for gas prices
@@ -262,8 +277,9 @@ GLOBAL OPTIONS:
     --gpo.percentile value         (default: 60)
           Suggested gas price is the given percentile of a set of recent transaction gas
           prices
-   
+
    LIGHT CLIENT
+
    
     --light.egress value           (default: 0)
           Outgoing bandwidth limit for serving light clients (kilobytes/sec, 0 =
@@ -285,17 +301,9 @@ GLOBAL OPTIONS:
     --light.serve value            (default: 0)
           Maximum percentage of time allowed for serving LES requests (multi-threaded
           processing allows values over 100)
-   
-    --ulc.fraction value           (default: 75)
-          Minimum % of trusted ultra-light servers required to announce a new head
-   
-    --ulc.onlyannounce             (default: false)
-          Ultra light server sends announcements only
-   
-    --ulc.servers value           
-          List of trusted ultra-light servers
-   
+
    LOGGING AND DEBUGGING
+
    
     --log.backtrace value         
           Request a stack trace at a specific logging statement (e.g. "block.go:271")
@@ -354,8 +362,9 @@ GLOBAL OPTIONS:
    
     --verbosity value              (default: 3)
           Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail
-   
+
    METRICS AND STATS
+
    
     --ethstats value              
           Reporting URL of a ethstats service (nodename:secret@host:port)
@@ -403,8 +412,9 @@ GLOBAL OPTIONS:
           Metrics HTTP server listening port.
           Please note that --metrics.addr must be set
           to start the server.
-   
+
    MINER
+
    
     --mine                         (default: false)
           Enable mining
@@ -426,8 +436,9 @@ GLOBAL OPTIONS:
    
     --miner.recommit value         (default: 2s)
           Time interval to recreate the block being mined
-   
+
    MISC
+
    
     --help, -h                     (default: false)
           show help
@@ -437,8 +448,9 @@ GLOBAL OPTIONS:
    
     --version, -v                  (default: false)
           print the version
-   
+
    NETWORKING
+
    
     --bootnodes value             
           Comma separated enode URLs for P2P discovery bootstrap
@@ -448,6 +460,12 @@ GLOBAL OPTIONS:
    
     --discovery.port value         (default: 30303)
           Use a custom UDP port for P2P discovery
+   
+    --discovery.v4, --discv4       (default: true)
+          Enables the V4 discovery mechanism
+   
+    --discovery.v5, --discv5       (default: false)
+          Enables the experimental RLPx V5 (Topic Discovery) mechanism
    
     --identity value              
           Custom node name
@@ -475,11 +493,9 @@ GLOBAL OPTIONS:
    
     --port value                   (default: 30303)
           Network listening port
-   
-    --v5disc                       (default: false)
-          Enables the experimental RLPx V5 (Topic Discovery) mechanism
-   
+
    PERFORMANCE TUNING
+
    
     --cache value                  (default: 1024)
           Megabytes of memory allocated to internal caching (default = 4096 mainnet full
@@ -510,19 +526,47 @@ GLOBAL OPTIONS:
           Percentage of cache memory allowance to use for trie caching (default = 15% full
           mode, 30% archive mode)
    
-    --cache.trie.journal value     (default: "triecache")
-          Disk journal directory for trie cache to survive node restarts
-   
-    --cache.trie.rejournal value   (default: 1h0m0s)
-          Time interval to regenerate the trie cache journal
-   
     --crypto.kzg value             (default: "gokzg")
           KZG library implementation to use; gokzg (recommended) or ckzg
    
     --fdlimit value                (default: 0)
           Raise the open file descriptor resource limit (default = system fd limit)
+
+   STATE HISTORY MANAGEMENT
+
    
-   TRANSACTION POOL
+    --gcmode value                 (default: "full")
+          Blockchain garbage collection mode, only relevant in state.scheme=hash ("full",
+          "archive")
+   
+    --history.state value          (default: 90000)
+          Number of recent blocks to retain state history for (default = 90,000 blocks, 0
+          = entire chain)
+   
+    --history.transactions value   (default: 2350000)
+          Number of recent blocks to maintain transactions index for (default = about one
+          year, 0 = entire chain)
+   
+    --state.scheme value           (default: "hash")
+          Scheme to use for storing ethereum state ('hash' or 'path')
+   
+    --syncmode value               (default: snap)
+          Blockchain sync mode ("snap", "full" or "light")
+
+   TRANSACTION POOL (BLOB)
+
+   
+    --blobpool.datacap value       (default: 10737418240)
+          Disk space to allocate for pending blob transactions (soft limit)
+   
+    --blobpool.datadir value       (default: "blobpool")
+          Data directory to store blob transactions in
+   
+    --blobpool.pricebump value     (default: 100)
+          Price bump percentage to replace an already existing blob transaction
+
+   TRANSACTION POOL (EVM)
+
    
     --txpool.accountqueue value    (default: 64)
           Maximum number of non-executable transaction slots permitted per account
@@ -552,16 +596,17 @@ GLOBAL OPTIONS:
           Price bump percentage to replace an already existing transaction
    
     --txpool.pricelimit value      (default: 1)
-          Minimum gas price limit to enforce for acceptance into the pool
+          Minimum gas price tip to enforce for acceptance into the pool
    
     --txpool.rejournal value       (default: 1h0m0s)
           Time interval to regenerate the local transaction journal
-   
+
    VIRTUAL MACHINE
+
    
     --vmdebug                      (default: false)
           Record information useful for VM and contract debugging
-   
+
 
 COPYRIGHT:
    Copyright 2013-2023 The go-ethereum Authors

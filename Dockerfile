@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
-FROM --platform=${BUILDPLATFORM} golang:1.20.7 as BUILDER
+FROM --platform=${BUILDPLATFORM} golang:1.21.1 as BUILDER
 RUN apt update && apt install -y build-essential git
 WORKDIR /geth
-ARG VERSION=v1.12.1
+ARG VERSION=v1.13.0
 RUN git clone --quiet --branch ${VERSION} --depth 1 https://github.com/ethereum/go-ethereum .
 RUN --mount=type=cache,target=/go/pkg/mod --mount=type=cache,target=/root/.cache/go-build go run build/ci.go install -static ./cmd/geth
 
