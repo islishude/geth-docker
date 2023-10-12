@@ -13,6 +13,6 @@ configMapGenerator:
       disableNameSuffixHash: true
 images:
   - name: ghcr.io/islishude/geth
-    newTag: 1.13.2
+    newTag: 1.13.3
   - name: gcr.io/prysmaticlabs/prysm/beacon-chain
     newTag: v4.0.8

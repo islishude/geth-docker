@@ -5,7 +5,7 @@ USAGE:
    geth [global options] command [command options] [arguments...]
 
 VERSION:
-   1.13.2-stable-dc34fe82
+   1.13.3-stable-0d45d72d
 
 COMMANDS:
    account                Manage accounts
@@ -447,7 +447,7 @@ GLOBAL OPTIONS:
           show help
    
     --synctarget value                                                     ($GETH_SYNCTARGET)
-          File for containing the hex-encoded block-rlp as sync target(dev feature)
+          Hash of the block to full sync to (dev testing feature)
    
     --version, -v                       (default: false)                  
           print the version
@@ -550,7 +550,7 @@ GLOBAL OPTIONS:
           Number of recent blocks to maintain transactions index for (default = about one
           year, 0 = entire chain)
    
-    --state.scheme value                (default: "hash")                  ($GETH_STATE_SCHEME)
+    --state.scheme value                                                   ($GETH_STATE_SCHEME)
           Scheme to use for storing ethereum state ('hash' or 'path')
    
     --syncmode value                    (default: snap)                    ($GETH_SYNCMODE)
