@@ -62,6 +62,7 @@ jobs:
           tags: ${{ steps.docker-meta.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          no-cache-filters: DIST
 
       - name: Sign the published Docker image
         if: ${{ github.ref_type == 'tag' }}
