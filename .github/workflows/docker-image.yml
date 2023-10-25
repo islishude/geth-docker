@@ -60,6 +60,7 @@ jobs:
           push: ${{ github.ref_type == 'tag' }}
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.docker-meta.outputs.tags }}
+          labels: ${{ steps.docker-meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           no-cache-filters: DIST
