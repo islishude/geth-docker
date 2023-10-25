@@ -1,5 +1,6 @@
-*.yml
-*.txt
-*.md
-*.json
+LICENSE
+.github
+k8s
+README.md
+flags.txt
 LICENSE
