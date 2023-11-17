@@ -58,12 +58,12 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: ${{ github.ref_type == 'tag' }}
+          pull: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          no-cache-filters: DIST
 
       - name: Sign the published Docker image
         if: ${{ github.ref_type == 'tag' }}
