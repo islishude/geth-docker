@@ -5,7 +5,7 @@ USAGE:
    geth [global options] command [command options] [arguments...]
 
 VERSION:
-   1.13.4-stable-3f907d6a
+   1.13.5-stable-916d6a44
 
 COMMANDS:
    account                Manage accounts
@@ -245,7 +245,7 @@ GLOBAL OPTIONS:
     --mainnet                           (default: false)                   ($GETH_MAINNET)
           Ethereum mainnet
    
-    --networkid value                   (default: 1)                       ($GETH_NETWORKID)
+    --networkid value                   (default: 0)                       ($GETH_NETWORKID)
           Explicitly set network id (integer)(For testnets: use --goerli, --sepolia,
           --holesky instead)
    
