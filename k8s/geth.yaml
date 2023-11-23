@@ -44,7 +44,8 @@ spec:
               "--authrpc.vhosts=*",
               "--authrpc.jwtsecret=/jwt/jwt.hex",
               "--authrpc.port=8551",
-              "--txlookuplimit=0",
+              "--history.state=0",
+              "--history.transactions=0",
             ]
           resources:
             requests:
