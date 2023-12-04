@@ -62,6 +62,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
+          annotations: ${{ steps.docker-meta.outputs.annotations }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
