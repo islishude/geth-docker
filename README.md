@@ -55,8 +55,8 @@ kubectl apply -k k8s
 
 ## Testnet
 
-- [holesky](./testnet/holeksy/docker-compose.yml)
-- [sepolia](./testnet/sepolia/docker-compose.yml)
+- [holesky](./testnet/holeksy)
+- [sepolia](./testnet/sepolia)
 
 ## For Development
 
