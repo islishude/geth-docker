@@ -2,8 +2,7 @@ version: "3.8"
 
 services:
   geth:
-    image: ethereum/client-go
-    pull_policy: always
+    image: ethereum/client-go:v1.13.5
     container_name: geth
     restart: unless-stopped
     ports:
@@ -39,9 +38,8 @@ services:
         max-size: 2m
         max-file: 10
   prysm:
-    image: gcr.io/prysmaticlabs/prysm/beacon-chain
-    pull_policy: always
-    container_name: beacon
+    image: gcr.io/prysmaticlabs/prysm/beacon-chain:v4.1.1
+    container_name: prysm
     restart: unless-stopped
     stop_grace_period: 2m
     volumes:
