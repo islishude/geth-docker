@@ -11,13 +11,9 @@ spec:
     - protocol: TCP
       targetPort: 8546
       port: 8546
-      name: websoket
-    - protocol: TCP
-      targetPort: 8551
-      port: 8551
-      name: authrpc
+      name: websocket
   selector:
-    app: geth
+    app: ethereum
 ---
 apiVersion: v1
 kind: Service
@@ -34,4 +30,4 @@ spec:
       port: 3500
       name: jsonrpc
   selector:
-    app: prysm
+    app: ethereum

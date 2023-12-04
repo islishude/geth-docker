@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ethereum
+spec:
+  selector:
+    matchLabels:
+      app: ethereum
+  replicas: 1
+  serviceName: ethereum
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: ethereum
+    spec:
+      terminationGracePeriodSeconds: 300
+      containers:
+        - name: geth
+          image: ethereum/client-go
+          ports:
+            - containerPort: 8545
+            - containerPort: 8546
+            - { containerPort: 30303, protocol: TCP }
+            - { containerPort: 30303, protocol: UDP }
+          args:
+            - --datadir=/data
+            - --http
+            - --http.api=eth,net,web3
+            - --http.addr=0.0.0.0
+            - --http.vhosts=*
+            - --http.corsdomain=*
+            - --ws
+            - --ws.origins=*
+            - --ws.addr=0.0.0.0
+            - --ws.api=eth,net,web3
+            - --graphql
+            - --graphql.corsdomain=*
+            - --graphql.vhosts=*
+          resources:
+            requests:
+              memory: 2G
+              cpu: 1000m
+            limits:
+              memory: 16G
+              cpu: 8000m
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8545
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8545
+          volumeMounts:
+            - name: geth
+              mountPath: /data
+        - name: beacon
+          image: gcr.io/prysmaticlabs/prysm/beacon-chain
+          args:
+            - --accept-terms-of-use
+            - --datadir=/data
+            - --execution-endpoint=/geth/geth.ipc
+            - --rpc-host=0.0.0.0
+            - --rpc-port=4000
+            - --grpc-gateway-corsdomain=*
+            - --grpc-gateway-host=0.0.0.0
+            - --grpc-gateway-port=3500
+          ports:
+            - containerPort: 4000
+              name: grpc
+            - containerPort: 3500
+              name: jsonrpc
+            - containerPort: 13000
+              name: p2ptcp
+            - containerPort: 12000
+              protocol: UDP
+              name: p2pudp
+          readinessProbe:
+            tcpSocket:
+              port: 4000
+          livenessProbe:
+            tcpSocket:
+              port: 4000
+          startupProbe:
+            failureThreshold: 60
+            tcpSocket:
+              port: 4000
+          resources:
+            limits:
+              cpu: 8000m
+              memory: 16G
+            requests:
+              cpu: 1000m
+              memory: 4G
+          volumeMounts:
+            - name: prysm
+              mountPath: /data
+            - name: geth
+              mountPath: /geth
+      volumes:
+        - name: geth
+          persistentVolumeClaim:
+            claimName: chaindata-geth
+        - name: prysm
+          persistentVolumeClaim:
+            claimName: chaindata-prysm

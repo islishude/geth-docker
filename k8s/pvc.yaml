@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: chaindata-gethnode
+  name: chaindata-geth
 spec:
+  storageClassName: default # change it!
   resources:
     requests:
-      storage: 1200Gi
+      storage: 1500Gi
   volumeMode: Filesystem
-  storageClassName: ebs-gp3
   accessModes:
     - ReadWriteOnce
 ---
@@ -16,10 +16,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: chaindata-prysm
 spec:
+  storageClassName: default # change it!
   resources:
     requests:
-      storage: 300Gi
+      storage: 500Gi
   volumeMode: Filesystem
-  storageClassName: ebs-gp3
   accessModes:
     - ReadWriteOnce
