@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: geth
+spec:
+  ports:
+    - protocol: TCP
+      targetPort: 8545
+      port: 8545
+      name: http
+    - protocol: TCP
+      targetPort: 8546
+      port: 8546
+      name: websocket
+  selector:
+    app: ethereum
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prysm
+spec:
+  ports:
+    - protocol: TCP
+      targetPort: 4000
+      port: 4000
+      name: grpc
+    - protocol: TCP
+      targetPort: 3500
+      port: 3500
+      name: jsonrpc
+  selector:
+    app: ethereum

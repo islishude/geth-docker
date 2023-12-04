@@ -1,8 +1,14 @@
 # Geth Docker
 
-## For Production
+## Use the docker image
 
-### docker-compose
+```
+docker run --rm ghcr.io/islishude/geth:latest --help
+```
+
+## Mainnet
+
+### Run mainnet node with docker-compose
 
 Create storage directories
 
@@ -19,7 +25,7 @@ Start for mainnet
 $ docker-compose up -d
 ```
 
-### Kubernetes
+### Run mainnet node with kubernetes
 
 Create a storage class like following
 
@@ -27,7 +33,7 @@ Create a storage class like following
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: ebs-gp3 # change it!
+  name: ebs-gp3
 parameters:
   csi.storage.k8s.io/fstype: xfs
   encrypted: "false"
@@ -46,6 +52,11 @@ Start the statefulset in default namespace, you can add `-n` parameter to change
 ```
 kubectl apply -k k8s
 ```
+
+## Testnet
+
+- [holesky](./testnet/holeksy/docker-compose.yml)
+- [sepolia](./testnet/sepolia/docker-compose.yml)
 
 ## For Development
 

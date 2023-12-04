@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chaindata-geth
+spec:
+  storageClassName: default # change it!
+  resources:
+    requests:
+      storage: 500Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chaindata-prysm
+spec:
+  storageClassName: default # change it!
+  resources:
+    requests:
+      storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce

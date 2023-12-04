@@ -10,15 +10,16 @@ services:
       - 8545:8545
       - 8546:8546
     volumes:
-      - ${GETH_DATADIR:-/data/geth}:/root/.ethereum
-    stop_signal: SIGINT
+      - ./data/geth:/data
     stop_grace_period: 2m
     healthcheck:
-      test: ["CMD-SHELL", "geth attach --exec eth.blockNumber"]
+      test: ["CMD-SHELL", "geth attach --datadir /data --exec eth.blockNumber"]
       interval: 10s
       timeout: 5s
       retries: 5
     command:
+      - --sepolia
+      - --datadir=/data
       - --http
       - --http.api=eth,net,web3
       - --http.addr=0.0.0.0
@@ -36,28 +37,36 @@ services:
       options:
         max-size: 2m
         max-file: 10
+  genesis:
+    image: alpine:latest
+    restart: on-failure
+    entrypoint: ["sh", "-c"]
+    command:
+      - "if [ ! -f genesis.ssz ]; then wget 'https://github.com/eth-clients/merge-testnets/raw/main/sepolia/genesis.ssz'; fi"
+    working_dir: /genesis
+    volumes:
+      - ./data/genesis:/genesis
   prysm:
     image: gcr.io/prysmaticlabs/prysm/beacon-chain:v4.1.1
     restart: unless-stopped
     stop_grace_period: 2m
     volumes:
-      - ${PRYSM_DATADIR:-/data/prysm}:/data
-      - ${GETH_DATADIR:-/data/geth}:/geth
+      - ./data/prysm:/data
+      - ./data/geth:/geth
+      - ./data/genesis:/genesis
     depends_on:
       geth:
         condition: service_healthy
-    ports:
-      - 4000:4000
-      - 3500:3500
+      genesis:
+        condition: service_completed_successfully
     command:
       - --accept-terms-of-use
+      - --sepolia
       - --datadir=/data
       - --execution-endpoint=/geth/geth.ipc
-      - --rpc-host=0.0.0.0
-      - --rpc-port=4000
-      - --grpc-gateway-corsdomain=*
-      - --grpc-gateway-host=0.0.0.0
-      - --grpc-gateway-port=3500
+      - --genesis-state=/genesis/genesis.ssz
+      - --checkpoint-sync-url=https://sepolia.beaconstate.info
+      - --genesis-beacon-api-url=https://sepolia.beaconstate.info
     logging:
       driver: json-file
       options:
