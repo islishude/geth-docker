@@ -67,3 +67,8 @@ kubectl apply -n namespace -k k8s
 
 - [Private Networks](https://geth.ethereum.org/docs/interface/private-network)
 - [Dev mode](https://geth.ethereum.org/getting-started/dev-mode)
+
+## Command line help page
+
+- [geth](./flags/geth)
+- [prysm](./flags/prysm-beacon-chain)
