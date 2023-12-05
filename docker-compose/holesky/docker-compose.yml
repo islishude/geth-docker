@@ -10,7 +10,7 @@ services:
       - 8545:8545
       - 8546:8546
     volumes:
-      - ./data/geth:/data
+      - ${GETH_DATADIR:-/data/geth}:/data
     stop_grace_period: 2m
     healthcheck:
       test: ["CMD-SHELL", "geth attach --datadir /data --exec eth.blockNumber"]
@@ -45,14 +45,14 @@ services:
       - "if [ ! -f genesis.ssz ]; then wget 'https://github.com/eth-clients/holesky/raw/main/custom_config_data/genesis.ssz'; fi"
     working_dir: /genesis
     volumes:
-      - ./data/prysm:/genesis
+      - ${PRYSM_DATADIR:-/data/prysm}:/genesis
   prysm:
     image: gcr.io/prysmaticlabs/prysm/beacon-chain:v4.1.1
     restart: unless-stopped
     stop_grace_period: 2m
     volumes:
-      - ./data/prysm:/data
-      - ./data/geth:/geth
+      - ${PRYSM_DATADIR:-/data/prysm}:/data
+      - ${GETH_DATADIR:-/data/geth}:/geth
     depends_on:
       geth:
         condition: service_healthy
