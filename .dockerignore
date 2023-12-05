@@ -1,6 +1,7 @@
 LICENSE
 .github
 k8s
+flags
+docker-compose
 README.md
-flags.txt
 LICENSE
