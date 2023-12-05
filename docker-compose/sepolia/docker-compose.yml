@@ -45,7 +45,7 @@ services:
       - "if [ ! -f genesis.ssz ]; then wget 'https://github.com/eth-clients/merge-testnets/raw/main/sepolia/genesis.ssz'; fi"
     working_dir: /genesis
     volumes:
-      - ./data/genesis:/genesis
+      - ./data/prysm:/genesis
   prysm:
     image: gcr.io/prysmaticlabs/prysm/beacon-chain:v4.1.1
     restart: unless-stopped
@@ -53,7 +53,6 @@ services:
     volumes:
       - ./data/prysm:/data
       - ./data/geth:/geth
-      - ./data/genesis:/genesis
     depends_on:
       geth:
         condition: service_healthy
@@ -64,7 +63,7 @@ services:
       - --sepolia
       - --datadir=/data
       - --execution-endpoint=/geth/geth.ipc
-      - --genesis-state=/genesis/genesis.ssz
+      - --genesis-state=/data/genesis.ssz
       - --checkpoint-sync-url=https://sepolia.beaconstate.info
       - --genesis-beacon-api-url=https://sepolia.beaconstate.info
     logging:
