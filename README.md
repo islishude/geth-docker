@@ -3,14 +3,18 @@
 ## Use the docker image
 
 ```
-docker run --rm ghcr.io/islishude/geth:latest --help
+docker pull ghcr.io/islishude/geth:latest --help
+docker pull ghcr.io/islishude/geth:1.13.5 --help
 ```
 
-## Mainnet
+## docker-compose
 
-### Run mainnet node with docker-compose
+- [mainnet](./docker-compose/mainnet)
+- [holesky](./docker-compose/holeksy)
+- [sepolia](./docker-compose/sepolia)
+- [goerli](./docker-compose/goerli)
 
-Create storage directories
+**Create the storage directories**
 
 ```console
 $ export GETH_DATADIR=/data/geth
@@ -19,15 +23,20 @@ $ export PRYSM_DATADIR=/data/prysm
 $ sudo mkdir -p $PRYSM_DATADIR
 ```
 
-Start for mainnet
+**Start**
 
 ```
 $ docker-compose up -d
 ```
 
-### Run mainnet node with kubernetes
+## Kubernetes
 
-Create a storage class like following
+- [mainnet](./k8s/mainnet)
+- [holesky](./k8s/holeksy)
+- [sepolia](./k8s/sepolia)
+- [goerli](./k8s/goerli)
+
+**Create a storage class like following**
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -45,18 +54,13 @@ volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
 ```
 
-then update [pvc](k8s/pvc.yaml) file with the storage class name.
+then update pvc.yaml file to change the storage class name to the above.
 
 Start the statefulset in default namespace, you can add `-n` parameter to change it.
 
 ```
-kubectl apply -k k8s
+kubectl apply -n namespace -k k8s
 ```
-
-## Testnet
-
-- [holesky](./testnet/holeksy)
-- [sepolia](./testnet/sepolia)
 
 ## For Development
 

@@ -1,0 +1,74 @@
+version: "3.8"
+
+services:
+  geth:
+    image: ethereum/client-go:v1.13.5
+    restart: unless-stopped
+    ports:
+      - 30303:30303
+      - 30303:30303/udp
+      - 8545:8545
+      - 8546:8546
+    volumes:
+      - ./data/geth:/data
+    stop_grace_period: 2m
+    healthcheck:
+      test: ["CMD-SHELL", "geth attach --datadir /data --exec eth.blockNumber"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command:
+      - --goerli
+      - --datadir=/data
+      - --http
+      - --http.api=eth,net,web3
+      - --http.addr=0.0.0.0
+      - --http.vhosts=*
+      - --http.corsdomain=*
+      - --ws
+      - --ws.origins=*
+      - --ws.addr=0.0.0.0
+      - --ws.api=eth,net,web3
+      - --graphql
+      - --graphql.corsdomain=*
+      - --graphql.vhosts=*
+    logging:
+      driver: json-file
+      options:
+        max-size: 2m
+        max-file: 10
+  genesis:
+    image: alpine:latest
+    restart: on-failure
+    entrypoint: ["sh", "-c"]
+    command:
+      - "if [ ! -f genesis.ssz ]; then wget 'https://github.com/eth-clients/eth2-networks/raw/master/shared/prater/genesis.ssz'; fi"
+    working_dir: /genesis
+    volumes:
+      - ./data/genesis:/genesis
+  prysm:
+    image: gcr.io/prysmaticlabs/prysm/beacon-chain:v4.1.1
+    restart: unless-stopped
+    stop_grace_period: 2m
+    volumes:
+      - ./data/prysm:/data
+      - ./data/geth:/geth
+      - ./data/genesis:/genesis
+    depends_on:
+      geth:
+        condition: service_healthy
+      genesis:
+        condition: service_completed_successfully
+    command:
+      - --accept-terms-of-use
+      - --goerli
+      - --datadir=/data
+      - --execution-endpoint=/geth/geth.ipc
+      - --genesis-state=/genesis/genesis.ssz
+      - --checkpoint-sync-url=https://goerli.beaconstate.info
+      - --genesis-beacon-api-url=https://goerli.beaconstate.info
+    logging:
+      driver: json-file
+      options:
+        max-size: 2m
+        max-file: 10
