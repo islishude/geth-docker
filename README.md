@@ -39,10 +39,11 @@ $ docker-compose up -d
 **Create a storage class like following**
 
 ```yaml
+# an example for aws and ebs csi
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: ebs-gp3
+  name: my-ebs
 parameters:
   csi.storage.k8s.io/fstype: xfs
   encrypted: "false"
