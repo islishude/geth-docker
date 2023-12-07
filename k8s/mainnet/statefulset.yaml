@@ -16,6 +16,7 @@ spec:
         app: ethereum
     spec:
       terminationGracePeriodSeconds: 300
+      enableServiceLinks: false
       containers:
         - name: geth
           image: ethereum/client-go

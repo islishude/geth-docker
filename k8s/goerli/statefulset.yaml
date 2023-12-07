@@ -16,11 +16,15 @@ spec:
         app: ethereum
     spec:
       terminationGracePeriodSeconds: 300
+      enableServiceLinks: false
       initContainers:
         - name: genesis
           iamge: alpine
           command: ["sh", "-c"]
-          args: ["if [ ! -f genesis.ssz ]; then wget 'https://github.com/eth-clients/eth2-networks/raw/master/shared/prater/genesis.ssz'; fi"]
+          args:
+            [
+              "if [ ! -f genesis.ssz ]; then wget 'https://github.com/eth-clients/eth2-networks/raw/master/shared/prater/genesis.ssz'; fi",
+            ]
           workingDir: "/data"
           volumeMounts:
             - name: prysm

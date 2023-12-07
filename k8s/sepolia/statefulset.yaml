@@ -16,6 +16,7 @@ spec:
         app: ethereum
     spec:
       terminationGracePeriodSeconds: 300
+      enableServiceLinks: false
       initContainers:
         - name: genesis
           iamge: alpine
