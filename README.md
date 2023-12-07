@@ -1,11 +1,17 @@
 # Geth Docker
 
+- security by default, No root, No shell
+- minimal and static binary
+- multi-arch
+
 ## Use the docker image
 
 ```
-docker pull ghcr.io/islishude/geth:latest --help
-docker pull ghcr.io/islishude/geth:1.13.5 --help
+docker pull ghcr.io/islishude/geth:latest
+docker pull ghcr.io/islishude/geth:1.13.5
 ```
+
+**NOTE**: the default user id of the image is **65532**
 
 ## docker-compose
 
@@ -56,6 +62,21 @@ allowVolumeExpansion: true
 ```
 
 then update pvc.yaml file to change the storage class name to the above.
+
+the statefulsets are using official image(ethereum/client-go).
+
+if you want to use my image, then you need to add securityContext to the statefulset due to the default user is not root.
+
+```yaml
+spec:
+  template:
+    spec:
+      securityContext:
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        fsGroupChangePolicy: OnRootMismatch
+```
 
 Start the statefulset in default namespace, you can add `-n` parameter to change it.
 
