@@ -19,7 +19,7 @@ spec:
       enableServiceLinks: false
       initContainers:
         - name: genesis
-          iamge: alpine
+          image: alpine
           command: ["sh", "-c"]
           args:
             [
