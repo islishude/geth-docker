@@ -5,7 +5,7 @@ USAGE:
    geth [global options] command [command options] [arguments...]
 
 VERSION:
-   1.13.5-stable-916d6a44
+   1.13.6-stable-da6cdaf6
 
 COMMANDS:
    account                Manage accounts
@@ -16,7 +16,6 @@ COMMANDS:
    dumpconfig             Export configuration values in a TOML format
    dumpgenesis            Dumps genesis block JSON configuration to stdout
    export                 Export blockchain into file
-   export-preimages       Export the preimage database into an RLP stream
    import                 Import a blockchain file
    import-preimages       Import the preimage database from an RLP stream
    init                   Bootstrap and initialize a new genesis block
@@ -68,6 +67,12 @@ GLOBAL OPTIONS:
     --cache.trie.rejournal value        (default: 0s)                      ($GETH_CACHE_TRIE_REJOURNAL)
           Time interval to regenerate the trie cache journal
    
+    --log.backtrace value                                                  ($GETH_LOG_BACKTRACE)
+          Request a stack trace at a specific logging statement (deprecated)
+   
+    --log.debug                         (default: false)                   ($GETH_LOG_DEBUG)
+          Prepends log messages with call-site location (deprecated)
+   
     --nousb                             (default: false)                   ($GETH_NOUSB)
           Disables monitoring for and managing USB hardware wallets (deprecated)
    
@@ -114,7 +119,7 @@ GLOBAL OPTIONS:
           Comma separated list of virtual hostnames from which to accept requests (server
           enforced). Accepts '*' wildcard.
    
-    --header value, -H value                                              
+    --header value, -H value                                               ($GETH_HEADER)
           Pass custom headers to the RPC server when using --remotedb or the geth attach
           console. This flag can be given multiple times.
    
@@ -172,7 +177,7 @@ GLOBAL OPTIONS:
     --rpc.gascap value                  (default: 50000000)                ($GETH_RPC_GASCAP)
           Sets a cap on gas that can be used in eth_call/estimateGas (0=infinite)
    
-    --rpc.txfeecap value                (default: 1)                      
+    --rpc.txfeecap value                (default: 1)                       ($GETH_RPC_TXFEECAP)
           Sets a cap on transaction fee (in ether) that can be sent via the RPC APIs (0 =
           no cap)
    
@@ -267,10 +272,10 @@ GLOBAL OPTIONS:
     --gpo.blocks value                  (default: 20)                      ($GETH_GPO_BLOCKS)
           Number of recent blocks to check for gas prices
    
-    --gpo.ignoreprice value             (default: 2)                      
+    --gpo.ignoreprice value             (default: 2)                       ($GETH_GPO_IGNOREPRICE)
           Gas price below which gpo will ignore transactions
    
-    --gpo.maxprice value                (default: 500000000000)           
+    --gpo.maxprice value                (default: 500000000000)            ($GETH_GPO_MAXPRICE)
           Maximum transaction priority fee (or gasprice before London fork) to be
           recommended by gpo
    
@@ -282,37 +287,29 @@ GLOBAL OPTIONS:
 
    
     --light.egress value                (default: 0)                       ($GETH_LIGHT_EGRESS)
-          Outgoing bandwidth limit for serving light clients (kilobytes/sec, 0 =
-          unlimited)
+          Outgoing bandwidth limit for serving light clients (deprecated)
    
     --light.ingress value               (default: 0)                       ($GETH_LIGHT_INGRESS)
-          Incoming bandwidth limit for serving light clients (kilobytes/sec, 0 =
-          unlimited)
+          Incoming bandwidth limit for serving light clients (deprecated)
    
     --light.maxpeers value              (default: 100)                     ($GETH_LIGHT_MAXPEERS)
           Maximum number of light clients to serve, or light servers to attach to
+          (deprecated)
    
     --light.nopruning                   (default: false)                   ($GETH_LIGHT_NOPRUNING)
-          Disable ancient light chain data pruning
+          Disable ancient light chain data pruning (deprecated)
    
     --light.nosyncserve                 (default: false)                   ($GETH_LIGHT_NOSYNCSERVE)
-          Enables serving light clients before syncing
+          Enables serving light clients before syncing (deprecated)
    
     --light.serve value                 (default: 0)                       ($GETH_LIGHT_SERVE)
-          Maximum percentage of time allowed for serving LES requests (multi-threaded
-          processing allows values over 100)
+          Maximum percentage of time allowed for serving LES requests (deprecated)
 
    LOGGING AND DEBUGGING
 
    
-    --log.backtrace value                                                  ($GETH_LOG_BACKTRACE)
-          Request a stack trace at a specific logging statement (e.g. "block.go:271")
-   
     --log.compress                      (default: false)                   ($GETH_LOG_COMPRESS)
           Compress the log files
-   
-    --log.debug                         (default: false)                   ($GETH_LOG_DEBUG)
-          Prepends log messages with call-site location (file and line number)
    
     --log.file value                                                       ($GETH_LOG_FILE)
           Write logs to a file
@@ -554,7 +551,7 @@ GLOBAL OPTIONS:
           Scheme to use for storing ethereum state ('hash' or 'path')
    
     --syncmode value                    (default: snap)                    ($GETH_SYNCMODE)
-          Blockchain sync mode ("snap", "full" or "light")
+          Blockchain sync mode ("snap" or "full")
 
    TRANSACTION POOL (BLOB)
 

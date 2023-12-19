@@ -6,6 +6,6 @@ resources:
   - statefulset.yaml
 images:
   - name: ethereum/go-client
-    newTag: v1.13.5
+    newTag: v1.13.6
   - name: gcr.io/prysmaticlabs/prysm/beacon-chain
     newTag: v4.1.1

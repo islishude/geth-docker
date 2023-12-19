@@ -8,7 +8,7 @@
 
 ```
 docker pull ghcr.io/islishude/geth:latest
-docker pull ghcr.io/islishude/geth:1.13.5
+docker pull ghcr.io/islishude/geth:1.13.6
 ```
 
 **NOTE**: the default user id of the image is **65532**
