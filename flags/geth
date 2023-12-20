@@ -5,7 +5,7 @@ USAGE:
    geth [global options] command [command options] [arguments...]
 
 VERSION:
-   1.13.6-stable-da6cdaf6
+   1.13.7-stable-c3d9ca62
 
 COMMANDS:
    account                Manage accounts
