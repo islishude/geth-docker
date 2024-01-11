@@ -5,7 +5,7 @@ USAGE:
    geth [global options] command [command options] [arguments...]
 
 VERSION:
-   1.13.8-stable-b20b4a71
+   1.13.9-stable-dd938d10
 
 COMMANDS:
    account                Manage accounts
@@ -221,7 +221,7 @@ GLOBAL OPTIONS:
     --config value                                                         ($GETH_CONFIG)
           TOML configuration file
    
-    --datadir value                     (default: /Users/lishude/Library/Ethereum) ($GETH_DATADIR)
+    --datadir value                     (default: /Users/sudoless/Library/Ethereum) ($GETH_DATADIR)
           Data directory for the databases and keystore
    
     --datadir.ancient value                                                ($GETH_DATADIR_ANCIENT)
@@ -609,4 +609,4 @@ GLOBAL OPTIONS:
 
 
 COPYRIGHT:
-   Copyright 2013-2023 The go-ethereum Authors
+   Copyright 2013-2024 The go-ethereum Authors
