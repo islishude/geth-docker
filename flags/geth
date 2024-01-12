@@ -5,7 +5,7 @@ USAGE:
    geth [global options] command [command options] [arguments...]
 
 VERSION:
-   1.13.9-stable-dd938d10
+   1.13.10-stable-bc0be1b1
 
 COMMANDS:
    account                Manage accounts
@@ -46,7 +46,7 @@ GLOBAL OPTIONS:
     --password value                                                       ($GETH_PASSWORD)
           Password file to use for non-interactive password input
    
-    --pcscdpath value                                                      ($GETH_PCSCDPATH)
+    --pcscdpath value                   (default: "/run/pcscd/pcscd.comm") ($GETH_PCSCDPATH)
           Path to the smartcard daemon (pcscd) socket file
    
     --signer value                                                         ($GETH_SIGNER)
@@ -221,7 +221,7 @@ GLOBAL OPTIONS:
     --config value                                                         ($GETH_CONFIG)
           TOML configuration file
    
-    --datadir value                     (default: /Users/sudoless/Library/Ethereum) ($GETH_DATADIR)
+    --datadir value                     (default: /home/nonroot/.ethereum) ($GETH_DATADIR)
           Data directory for the databases and keystore
    
     --datadir.ancient value                                                ($GETH_DATADIR_ANCIENT)
