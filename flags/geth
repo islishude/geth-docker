@@ -5,7 +5,7 @@ USAGE:
    geth [global options] command [command options] [arguments...]
 
 VERSION:
-   1.13.11-stable-8f7eb9cc
+   1.13.12-stable-02eb36af
 
 COMMANDS:
    account                Manage accounts
@@ -16,7 +16,9 @@ COMMANDS:
    dumpconfig             Export configuration values in a TOML format
    dumpgenesis            Dumps genesis block JSON configuration to stdout
    export                 Export blockchain into file
+   export-history         Export blockchain history to Era archives
    import                 Import a blockchain file
+   import-history         Import an Era archive
    import-preimages       Import the preimage database from an RLP stream
    init                   Bootstrap and initialize a new genesis block
    js                     (DEPRECATED) Execute the specified JavaScript files
@@ -428,7 +430,7 @@ GLOBAL OPTIONS:
     --miner.gaslimit value              (default: 30000000)                ($GETH_MINER_GASLIMIT)
           Target gas ceiling for mined blocks
    
-    --miner.gasprice value              (default: 0)                       ($GETH_MINER_GASPRICE)
+    --miner.gasprice value              (default: 1000000000)              ($GETH_MINER_GASPRICE)
           Minimum gas price for mining a transaction
    
     --miner.newpayload-timeout value    (default: 2s)                      ($GETH_MINER_NEWPAYLOAD_TIMEOUT)
