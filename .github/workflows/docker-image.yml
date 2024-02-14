@@ -69,7 +69,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=semver,pattern={{version}},suffix=debug
-            type=ref,event=branch,suffix=debug
+            type=ref,event=branch,suffix=-debug
 
       - name: Build debug
         uses: docker/build-push-action@v5
