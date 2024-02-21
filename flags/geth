@@ -5,7 +5,7 @@ USAGE:
    geth [global options] command [command options] [arguments...]
 
 VERSION:
-   1.13.12-stable-02eb36af
+   1.13.13-stable-7f131dcb
 
 COMMANDS:
    account                Manage accounts
@@ -223,7 +223,7 @@ GLOBAL OPTIONS:
     --config value                                                         ($GETH_CONFIG)
           TOML configuration file
    
-    --datadir value                     (default: /home/nonroot/.ethereum) ($GETH_DATADIR)
+    --datadir value                     (default: /root/.ethereum)         ($GETH_DATADIR)
           Data directory for the databases and keystore
    
     --datadir.ancient value                                                ($GETH_DATADIR_ANCIENT)
