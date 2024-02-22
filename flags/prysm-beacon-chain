@@ -19,7 +19,6 @@ cmd OPTIONS:
    --clear-db                                           Prompt for clearing any previously stored data at the data directory. (default: false)
    --config-file value                                  Filepath to a yaml file with flag values.
    --datadir value                                      Data directory for the databases. (default: "/root/.eth2")
-   --db-backup-output-dir value                         Output directory for db backups.
    --disable-monitoring                                 Disables monitoring service. (default: false)
    --e2e-config                                         Enables the E2E testing config, only for use within end-to-end testing. (default: false)
    --enable-tracing                                     Enables request tracing. (default: false)
@@ -57,11 +56,13 @@ debug OPTIONS:
    --trace value                 Writes execution trace to the given file.
    
 beacon-chain OPTIONS:
-   --blob-batch-limit value                                            The amount of blobs the local peer is bounded to request and respond to in a batch. (default: 8)
+   --backfill-batch-size value                                         Number of blocks per backfill batch. A larger number will request more blocks at once from peers, but also consume more system memory to hold batches in memory during processing. This has a multiplicative effect with backfill-worker-count (default: 64)
+   --backfill-worker-count value                                       Number of concurrent backfill batch requests. A larger number will better utilize network resources, up to a system-dependent limit, but will also consume more system memory to hold batches in memory during processing. Multiply by backfill-batch-size and average block size (~2MB before deneb) to find the right number for your system. This has a multiplicatice effect with backfill-batch-size (default: 2)
+   --blob-batch-limit value                                            The amount of blobs the local peer is bounded to request and respond to in a batch. (default: 64)
    --blob-batch-limit-burst-factor value                               The factor by which blob batch limit may increase on burst. (default: 2)
    --blob-path value                                                   Location for blob storage. Default location will be a 'blobs' directory next to the beacon db.
    --blob-retention-epochs value, --extend-blob-retention-epoch value  Override the default blob retention period (measured in epochs). The node will exit with an error at startup if the value is less than the default of 4096 epochs. (default: 4096)
-   --block-batch-limit value                                           The amount of blocks the local peer is bounded to request and respond to in a batch. (default: 64)
+   --block-batch-limit value                                           The amount of blocks the local peer is bounded to request and respond to in a batch. Maximum 128 (default: 64)
    --block-batch-limit-burst-factor value                              The factor by which block batch limit may increase on burst. (default: 2)
    --chain-id value                                                    Sets the chain id of the beacon chain (default: 0)
    --checkpoint-block value                                            Rather than syncing from genesis, you can start processing from a ssz-serialized BeaconState+Block. This flag allows you to specify a local file containing the checkpoint Block to load.
@@ -71,6 +72,7 @@ beacon-chain OPTIONS:
    --deposit-contract value                                            Deposit contract address. Beacon chain node will listen logs coming from the deposit contract to determine when validator is eligible to participate. (default: "0x00000000219ab540356cBB839Cbe05303d7705Fa")
    --disable-grpc-gateway                                              Disable the gRPC gateway for JSON-HTTP requests (default: false)
    --enable-debug-rpc-endpoints                                        Enables the debug rpc service, containing utility endpoints such as /eth/v1alpha1/beacon/state. (default: false)
+   --enable-experimental-backfill                                      Backfill is still experimental at this time.It will only be enabled if this flag is specified and the node was started using checkpoint sync. (default: false)
    --engine-endpoint-timeout-seconds value                             Sets the execution engine timeout (seconds) for execution payload semantics (forkchoiceUpdated, newPayload) (default: 0)
    --eth1-header-req-limit value                                       Sets the maximum number of headers that a deposit log query can fetch. (default: 1000)
    --execution-endpoint value                                          An execution client http endpoint. Can contain auth header as well in the format (default: "http://localhost:8551")
@@ -129,16 +131,17 @@ log OPTIONS:
 features OPTIONS:
    --dev                                     Enables experimental features still in development. These features may not be stable. (default: false)
    --disable-broadcast-slashings             Disables broadcasting slashings submitted to the beacon node. (default: false)
+   --disable-eip-4881                        Disables the deposit tree specified in EIP-4881. (default: false)
    --disable-grpc-connection-logging         Disables displaying logs for newly connected grpc clients. (default: false)
    --disable-peer-scorer                     (Danger): Disables P2P peer scorer. Do NOT use this in production! (default: false)
    --disable-registration-cache              Temporary flag for disabling the validator registration cache instead of using the DB. Note: registrations do not clear on restart while using the DB. (default: false)
    --disable-resource-manager                Disables running the libp2p resource manager. (default: false)
    --disable-staking-contract-check          Disables checking of staking contract deposits when proposing blocks, useful for devnets. (default: false)
-   --enable-eip-4881                         Enables the deposit tree specified in EIP-4881. (default: false)
+   --disable-verbose-sig-verification        Disables identifying invalid signatures if batch verification fails when processing block. (default: false)
    --enable-experimental-state               Turns on the latest and greatest (but potentially unstable) changes to the beacon state. (default: false)
    --enable-full-ssz-data-logging            Enables displaying logs for full ssz data on rejected gossip messages. (default: false)
    --enable-historical-state-representation  Enables the beacon chain to save historical states in a space efficient manner. (Warning): Once enabled, this feature migrates your database in to a new schema and there is no going back. At worst, your entire database might get corrupted. (default: false)
-   --enable-verbose-sig-verification         Enables identifying invalid signatures if batch verification fails when processing block. (default: false)
+   --enable-lightclient                      Enables the light client support in the beacon node (default: false)
    --holesky                                 Runs Prysm configured for the Holesky test network. (default: false)
    --interop-write-ssz-state-transitions     Writes SSZ states to disk after attempted state transitio. (default: false)
    --mainnet                                 Runs on Ethereum main network. This is the default and can be omitted. (default: true)
@@ -152,5 +155,8 @@ interop OPTIONS:
    --genesis-state value           Load a genesis state from ssz file. Testnet genesis files can be found in the eth2-clients/eth2-testnets repository on github.
    --interop-genesis-time value    Specify the genesis time for interop genesis state generation. Must be used with --interop-num-validators (default: 0)
    --interop-num-validators value  Specify number of genesis validators to generate for interop. Must be used with --interop-genesis-time (default: 0)
+   
+deprecated OPTIONS:
+   --db-backup-output-dir value  Output directory for db backups.
    
 
