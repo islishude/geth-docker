@@ -5,7 +5,7 @@ USAGE:
    geth [global options] command [command options] [arguments...]
 
 VERSION:
-   1.13.13-stable-7f131dcb
+   1.13.14-stable-2bd6bd01
 
 COMMANDS:
    account                Manage accounts
@@ -558,7 +558,7 @@ GLOBAL OPTIONS:
    TRANSACTION POOL (BLOB)
 
    
-    --blobpool.datacap value            (default: 10737418240)             ($GETH_BLOBPOOL_DATACAP)
+    --blobpool.datacap value            (default: 2684354560)              ($GETH_BLOBPOOL_DATACAP)
           Disk space to allocate for pending blob transactions (soft limit)
    
     --blobpool.datadir value            (default: "blobpool")              ($GETH_BLOBPOOL_DATADIR)
