@@ -35,8 +35,8 @@ services:
     logging:
       driver: json-file
       options:
-        max-size: 2m
-        max-file: 10
+        max-size: "50m"
+        max-file: "10"
   genesis:
     image: alpine:latest
     restart: on-failure
@@ -69,5 +69,5 @@ services:
     logging:
       driver: json-file
       options:
-        max-size: 2m
-        max-file: 10
+        max-size: "50m"
+        max-file: "10"
