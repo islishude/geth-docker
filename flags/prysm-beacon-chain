@@ -129,6 +129,7 @@ log OPTIONS:
    --log-format value  Specifies log formatting. Supports: text, json, fluentd, journald. (default: "text")
    
 features OPTIONS:
+   --blob-save-fsync                         Forces new blob files to be fysnc'd before continuing, ensuring durable blob writes. (default: false)
    --dev                                     Enables experimental features still in development. These features may not be stable. (default: false)
    --disable-broadcast-slashings             Disables broadcasting slashings submitted to the beacon node. (default: false)
    --disable-eip-4881                        Disables the deposit tree specified in EIP-4881. (default: false)
