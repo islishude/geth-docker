@@ -86,8 +86,9 @@ kubectl apply -n namespace -k k8s
 
 ## For Development
 
-- [Private Networks](https://geth.ethereum.org/docs/interface/private-network)
-- [Dev mode](https://geth.ethereum.org/getting-started/dev-mode)
+Refer to following link for the details
+
+https://github.com/islishude/eth-pos-devnet
 
 ## Command line help page
 
